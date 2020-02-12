@@ -1,0 +1,67 @@
+// Top
+=workshopSize($size)
+    display: flex
+    width: $size
+    height: 100%
+
+=rejectedSize($width, $height)
+    width: $width
+    height: $height
+
+=workshopLarge($size)
+    width: $size
+    height: $size
+    border-radius: 100%
+=circle($size, $radius)
+    height: $size
+    width: $size
+    border-radius: $radius
+//
+     
+// Middle/Bottom
+=boardContainer($height, $width, $direction)
+    display: flex
+    flex-direction: $direction
+    align-items: center
+    justify-content: center
+    height: $height
+    width: $width
+
+=board($boardSize)
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+    align-items: center
+    height: $boardSize
+    width: $boardSize
+    
+=square($squareSize)
+    height: $squareSize
+    width: $squareSize
+    border: 1px black solid
+
+=colSqrCont($boardHeight)
+    position: relative
+    height: $boardHeight
+    width: 30%
+    padding-right: 2%
+
+=negPoints($size)
+    position: absolute
+    top: 2%
+    left: 5%
+    height: $size
+    width: $size
+    border-radius: 100%
+    background-color: #353535
+    color: white
+
+=Btn($size)
+    display: flex
+    justify-content: space-around
+    align-items: center
+    height: 80%
+    width: 45%
+    background-color: #353535
+    font-size: $size
+//

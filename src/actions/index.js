@@ -1,0 +1,36 @@
+export const socketioInit = gameToken => ({
+	type: 'SOCKETIO_INIT',
+	gameToken
+})
+
+export const hostInit = () => ({
+	type: 'HOST_INIT'
+})
+
+// game data
+export const updateGameData = gameData => ({
+	type: 'UPDATE_GAME_DATA',
+	gameData,
+})
+
+export const initStartGame = id => ({
+	type: 'INIT_START_GAME',
+	id
+})
+
+// game
+export const chooseWorkshop = i => ({
+	type: 'CHOOSE__WORKSHOP',
+	workshopIndex: i
+});
+
+export const chooseSquareToCollectW = color => ({
+	type: 'CHOOSE_SQUARE_TO_COLLECT_W',
+	colorOfSquare: color
+});
+
+export const chooseRow = i => ({
+	type: 'CHOOSE_ROW',
+	rowIndex: i
+});
+

@@ -1,0 +1,76 @@
+@import ../sass/_mixins
+
+.workshops
+    height: 25%
+    width: 100%
+
+//Workshop
+.workshops__wrap
+    display: flex
+    justify-content: space-between
+    height: 30%
+    padding: 0 1%
+.workshops__workshopGroup
+    display: flex
+    justify-content: space-around
+    align-items: center
+    +workshopSize(47vw)
+.workshops__workshopLarge
+    +workshopLarge(100px)
+    background-color: #353535
+    overflow: hidden
+.workshops__workshop
+    +circle(40px, 50%)
+    background-color: #353535
+    overflow: hidden
+//
+
+//Rejected
+.workshops__rejected
+    display: flex
+    justify-content: space-around
+    align-items: center
+    width: 100%
+    height: 70%
+.workshops__rejectedGroup
+    +rejectedSize(33%,90%)
+    position: relative
+.workshops__rejectedSquare
+    +circle(40px, 20%)
+    position: absolute
+    background-color: #353535
+    cursor: pointer
+    text-align: center
+    font-size: 30px
+.workshops__rejectedSquare:nth-child(1)
+    top: -5%
+    left: 50%
+    transform: translate(-50%, 25%) rotate(35deg)
+.workshops__rejectedSquare:nth-child(2)
+    bottom: 7%
+    left: 7%
+    transform: rotate(152deg)
+.workshops__rejectedSquare:nth-child(3)
+    bottom: 5%
+    right: 5%
+    transform: rotate(-161deg)
+//
+
+//Color
+.workshops__color
+    height: 50%
+    width: 50%
+    // border: 4px solid black
+    float: left
+//
+.workshops__color--blue
+    background-color: #00A3FF
+.workshops__color--yellow
+    background-color: #FAFF00
+.workshops__color--red
+    background-color: #FF0000
+.workshops__color--black
+    background-color: #000000
+.workshops__color--white
+    background-color: #ffffff
+@import ../sass/_media

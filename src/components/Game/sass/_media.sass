@@ -1,0 +1,274 @@
+@import ./_mixins
+
+@media (max-height: 767px) and (max-width: 823px) and (orientation: landscape) //Rotate warning
+    .rotateWarning
+        display: block
+
+@media (max-width: 321px) //Small phones
+    
+    //Variables
+    $boardSize : 200px
+    $enemyBoardSize : 120px
+    $squareSize : calc(#{$boardSize - 16px} / 5)
+    $enemySquareSize : calc(#{$enemyBoardSize - 8px} / 5)
+    //
+
+    //Attribs using variables
+    .board__playerBoard
+        +board($boardSize)
+    .board__square
+        +square($squareSize)
+    .bottom__enemyBoard
+        +board($enemyBoardSize)
+    .bottom__enemySquare
+        +square($enemySquareSize)
+    .board__collectedSquaresContainer
+        +colSqrCont($boardSize)
+    .bottom__enemyCollectedSquaresContainer
+        +colSqrCont($enemyBoardSize)
+    //
+
+    //Top
+    .workshops__workshopLarge
+        +workshopLarge(90px)
+        background-color: #353535
+    .workshops__workshop
+        +circle(35px, 50%)
+        background-color: #353535
+    .workshops__rejectedSquare
+        +circle(35px, 20%)
+    //
+
+@media  (min-width: 768px) and (min-height: 858px) //Tablets
+    //Variables
+    $boardSize : 375px
+    $enemyBoardSize : 215px
+    $squareSize : calc(#{$boardSize - 36px} / 5)
+    $enemySquareSize : calc(#{$enemyBoardSize - 16px} / 5)
+    //
+
+    //Attribs using variables
+    .board__playerBoard
+        +board($boardSize)
+    .board__square
+        +square($squareSize)
+    .bottom__enemyBoard
+        +board($enemyBoardSize)
+    .bottom__enemySquare
+        +square($enemySquareSize)
+    .board__collectedSquaresContainer
+        +colSqrCont($boardSize)
+    .bottom__enemyCollectedSquaresContainer
+        +colSqrCont($enemyBoardSize)
+    //
+
+    //Top
+    .workshops
+        height: 30vh
+    .workshops__workshop
+        +circle(80px, 50%)
+    .workshops__workshopLarge
+        +workshopLarge(150px)
+    .workshops__rejectedSquare
+        +circle(70px, 20%)
+    .workshops__rejectedSquare:nth-child(1)
+        top: 3%
+        left: 51%
+    .workshops__rejectedSquare:nth-child(2)
+        left: 10%
+    .workshops__rejectedSquare:nth-child(3)
+        bottom: 3%
+        right: 10%
+    //
+    
+    //Middle
+    .board
+        height: 40vh
+    .board__collectedSquares
+        +circle(40px, 50%)
+    .board__negativePointsContainer
+        +negPoints(80px)
+        font-size: 40px
+    //
+
+    //Bottom
+    .bottom__players
+        font-size: 30px
+    .bottom__menuBtn
+        font-size: 65px
+    .bottom__changePlayerBtn
+        font-size: 100px
+    .bottom__enemyNameContainer
+        font-size: 30px
+    .bottom__enemyCollectedSquaresContainer
+        width: 35%
+    .bottom__enemyCollectedSquares
+        +circle(25px, 50%)
+    .bottom__enemyNegativePointsContainer
+        +negPoints(50px)
+        font-size: 28px
+    //
+
+@media (min-width: 1024px) //Desktop
+
+    //Variables
+    $boardSize : 325px
+    $enemyBoardSize : 175px
+    $squareSize : calc(#{$boardSize - 36px} / 5)
+    $enemySquareSize : calc(#{$enemyBoardSize - 16px} / 5)
+    //
+
+    //Attribs using variables
+    .board__playerBoard
+        +board($boardSize)
+    .board__square
+        +square($squareSize)
+    .bottom__enemyBoard
+        +board($enemyBoardSize)
+    .bottom__enemySquare
+        +square($enemySquareSize)
+    .board__collectedSquaresContainer
+        +colSqrCont($boardSize)
+    .bottom__enemyCollectedSquaresContainer
+        +colSqrCont($enemyBoardSize)
+    //
+
+    //Layout
+    .wrapper
+        min-height: 768px
+    .main
+        display: flex
+        flex-flow: row
+        flex-wrap: wrap
+        justify-content: space-around
+        min-height: 768px
+    .workshops
+        height: 45%
+    .board, .bottom
+        width: 48%
+        height: 55%
+    //
+
+    //Top
+    .workshops__wrap
+        height: 40%
+    .workshops__workshop
+        +circle(115px, 50%)
+    .workshops__workshopLarge
+        +workshopLarge(200px)
+    .workshops__rejected
+        height: 60%
+    .workshops__rejectedSquare
+        +circle(80px, 20%)
+    .workshops__rejectedSquare:nth-child(1)
+        top: -5%
+        left: 51%
+    .workshops__rejectedSquare:nth-child(2)
+        left: 13%
+        bottom: 10%
+    .workshops__rejectedSquare:nth-child(3)
+        bottom: 10%
+        right: 11%
+    //
+
+    //middle
+    .board__collectedSquares
+        +circle(25px, 50%)
+    .board__negativePointsContainer
+        +negPoints(60px)
+        font-size: 35px
+    //
+
+    //Bottom
+    .bottom
+        flex-direction: column
+        padding-top: 6%
+    .bottom__enemyContainer
+        width: 90%
+        height: 70%
+    .bottom__enemyCollectedSquares
+        +circle(20px, 50%)
+    .bottom__enemyNegativePointsContainer
+        +negPoints(40px)
+        font-size: 24px
+    .bottom__playersContainer
+        flex-direction: row
+        align-items: center
+        justify-content: space-around
+        height: 30%
+        width: 90%
+    .bottom__players
+        flex-direction: row
+        flex-wrap: wrap
+        align-items: center
+        justify-content: space-around
+        height: 100%
+        width: 65%
+        padding: 0
+        font-size: 26px
+    .bottom__player 
+        width: 40%
+    .bottom__changePlayer
+        height: 90%
+        width: 35%
+    //
+    
+@media (min-width: 1366px) //Desktop
+    //Variables
+    $boardSize : 450px
+    $enemyBoardSize : 250px
+    $squareSize : calc(#{$boardSize - 36px} / 5)
+    $enemySquareSize : calc(#{$enemyBoardSize - 16px} / 5)
+    //
+
+    //Attribs using variables
+    .board__playerBoard
+        +board($boardSize)
+    .board__square
+        +square($squareSize)
+    .bottom__enemyBoard
+        +board($enemyBoardSize)
+    .bottom__enemySquare
+        +square($enemySquareSize)
+    .board__collectedSquaresContainer
+        +colSqrCont($boardSize)
+    .bottom__enemyCollectedSquaresContainer
+        +colSqrCont($enemyBoardSize)
+    //
+ 
+    .wrapper
+        min-height: 868px
+    .main
+        min-height: 868px
+
+    //Top
+    .workshops__workshop
+        +circle(140px, 50%)
+    .workshops__workshopLarge
+        +workshopLarge(250px)
+    .workshops__rejectedSquare
+        +circle(100px, 20%)
+    //
+
+    //middle
+    .board__collectedSquares
+        +circle(30px, 50%)
+    .board__negativePointsContainer
+        +negPoints(80px)
+        font-size: 50px
+    //
+
+    //Bottom
+    .bottom
+        flex-direction: column
+        padding-top: 2%
+    .bottom__enemyCollectedSquares
+        +circle(24px, 50%)
+    .bottom__enemyNegativePointsContainer
+        +negPoints(50px)
+        font-size: 30px
+    .bottom__enemyName
+        font-size: 34px
+    .bottom__players
+        font-size: 34px
+    //

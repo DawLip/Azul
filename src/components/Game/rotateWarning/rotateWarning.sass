@@ -1,0 +1,44 @@
+@import ../sass/_variables
+
+.rotateWarning
+    display: none
+    position: absolute
+    top: 0
+    left: 0
+    background-color: black
+    font-family: roboto, sans-serif
+    height: 100vh
+    width: 100vw
+.rotateWarningContainer
+    display: flex
+    position: absolute
+    justify-content: center
+    align-items: flex-end
+    top: 20%
+    height: 50%
+    width: 100%
+.rotateWarning__text
+    color: white
+    font-size: 50px
+.rotateWarning__icon
+    color: white
+    font-size: 25px
+    position: absolute
+.rotateWarning__iconContainer
+    position: absolute
+    width: 150px
+    height: 150px
+    top: 0
+    right: 50%
+    transform: translateX(50%)
+.rotateWarning__icon:nth-of-type(1)
+    transform: rotate(75deg)
+    top: 40px
+    right: 62px
+.rotateWarning__icon:nth-of-type(2)
+    transform: rotate(-25deg)
+    font-size: 100px
+    top: 10px
+    right: 40px
+
+@import ../sass/_media

@@ -1,0 +1,122 @@
+@import ../sass/_variables
+@import ../sass/_mixins
+
+.bottom
+    display: flex
+    flex-direction: row-reverse
+    align-items: center
+    justify-content: space-around
+    height: 30vh
+    width: 100%
+
+//Enemy container
+.bottom__enemyContainer
+    +boardContainer(95%, 65%, column)
+    background-color: #131633
+    border: 2px solid #d4d4d4   
+
+    //Enemy name
+.bottom__enemyNameContainer
+    display: flex
+    justify-content: space-around
+    align-items: flex-end
+    width: 100%
+    height: 15%
+    color: white
+    //
+
+    //Enemy board
+.bottom__enemyBoardContainer
+    +boardContainer(85%, 100%, row-reverse)
+.bottom__enemyBoard
+    +board(145px)
+.bottom__enemySquare
+    +square($enemySquareSize)
+    //
+
+    //Enemy collected squares
+.bottom__enemyCollectedSquaresContainer
+    +colSqrCont($enemyBoardSize)
+.bottom__enemyCollectedSquares
+    +circle(10px, 50%)
+    margin-left: 5%
+    background-color: #353535
+    //
+
+    //Enemy nagative points
+.bottom__enemyNegativePointsContainer
+    +negPoints(26px)
+    display: flex
+    justify-content: space-around
+    align-items: center
+    letter-spacing: 1px
+    font-size: 14px
+.bottom__enemyNegativePoints
+    text-align: center
+    //
+//
+
+// Player list container
+
+    //Player list
+.bottom__playersContainer
+    display: flex
+    flex-direction: column
+    height: 95%
+    width: 30%
+    color: white
+.bottom__players
+    display: flex
+    flex-direction: column
+    justify-content: space-evenly
+    align-items: left
+    height: 65%
+    width: 100%
+    padding-left: 10%
+.bottom__playerPoints
+    padding-right: 5%
+    //
+    
+    //Player change
+.bottom__changePlayer
+    display: flex
+    align-items: center
+    justify-content: space-around
+    height: 35%
+    width: 100%
+.bottom__menuBtn
+    +Btn(35px)
+    cursor: pointer
+.bottom__changePlayerBtn
+    +Btn(50px)
+    cursor: pointer
+    //
+//
+
+//Colected squares
+.bottom__collectedSquaresContainer
+    +colSqrCont($boardSize)
+    display: flex
+    flex-direction: column 
+    align-items: center
+.bottom__collectedSquaresRow
+    display: flex
+    flex-direction: row-reverse
+    align-items: center
+    width: 100%
+    height: 20%
+
+//Square colors
+.bottom__square--blue
+    background-color: #00A3FF
+.bottom__square--yellow
+    background-color: #FAFF00
+.bottom__square--red
+    background-color: #FF0000
+.bottom__square--black
+    background-color: #000000
+.bottom__square--white
+    background-color: #ffffff
+//
+
+@import ../sass/_media

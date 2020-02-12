@@ -1,0 +1,109 @@
+@import ../../style/reset
+
+.main-menu
+	display: flex
+	min-height: 100vh
+	flex-wrap: wrap
+	justify-content: space-evenly
+	font-size: 10px
+	background-color: #eee
+	/* -------------header------------------ */
+	/* -------------header------------------ */
+.main-menu__header
+	margin: 10vh auto
+	width: 100%
+
+.main-menu__title
+	font-size: 2.8em
+
+	/* -------------header------------------ */
+	/* -------------main-------------------- */
+.main-menu__main
+	display: flex
+	flex-wrap: wrap
+	flex-basis: 60%
+	align-items: space-around
+	justify-content: space-around
+	height: 60vh
+	padding: 10px 25px
+	background-color: #ccc
+	a
+		display: flex
+		align-content: center
+		justify-content: center
+		font-family: 'Press Start 2P', sans-serif
+		text-decoration: none
+		border: none
+		background-color: #777
+		flex-basis: 100%
+		margin: 10px 0
+		button
+			display: block
+			flex-basis: 80%
+			margin: 10px 0
+			border: none
+			background-color: transparent
+			text-decoration: none
+			font-family: 'Press Start 2P', sans-serif
+			font-size: 1.8em
+		&:nth-of-type(3)
+			flex-basis: 100px
+			flex-grow: 1
+			margin: 10px 10px 10px 0
+
+.main-menu__input
+	display: block
+	flex-grow: 1
+	width: 100px
+	margin: 10px 0 10px 10px
+	background-color: #fff
+	font-size: 1.8em
+	font-family: 'Press Start 2P', sans-serif
+
+	/* -------------main-------------------- */
+	/* ------------aside-------------------- */
+.main-menu__social
+	display: flex
+	flex-basis: 30%
+	flex-direction: column
+	height: 60vh
+	// background-color: #ccc
+
+.main-menu__settings,
+.main-menu__news,
+.main-menu__a
+	display: flex
+	justify-content: center
+	align-items: center
+	margin: 0 10px 10px
+
+.menu__a
+	margin: 0 10px
+
+.main-menu__settings
+	flex-grow: 3
+	background-color: goldenrod
+
+.main-menu__news
+	flex-grow: 2
+	background-color: cadetblue
+
+.main-menu__a
+	flex-grow: 1
+	justify-content: space-around
+
+.main-menu__a a
+	display: flex
+	justify-content: center
+	align-items: center
+	flex-grow: 1
+	height: 100%
+	text-decoration: none
+	color: white
+
+.main-menu__fb
+	background-color: #3b5998
+	margin-right: 10px
+
+.main-menu__yt
+	background-color: #c4302b
