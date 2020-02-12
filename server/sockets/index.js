@@ -22,7 +22,7 @@ export default (server) => {
 
 			games[`X${room}`].playersIds.push(playerId)
 
-			socket.in(room).emit('gameData', games[`X${room}`])
+			socket.in(room).broadcast.emit('gameData', games[`X${room}`])
 			socket.emit('gameData', {
 				...games[`X${room}`],
 				room,

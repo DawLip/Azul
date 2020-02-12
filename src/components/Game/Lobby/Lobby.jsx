@@ -17,7 +17,7 @@ class Lobby extends React.Component {
 
 	render() {
 		const { gameData } = this.props
-		const numOfPlayers = gameData.players?.length || 0
+		const numOfPlayers = gameData.playersIds?.length || 0
 		const maxNumOfPlayers = 8
 		const players = []
 
