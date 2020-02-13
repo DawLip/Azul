@@ -1,15 +1,16 @@
-import { updateGameData } from '../actions/index.js';
+import { updateGameData, randomColors } from '../actions/index.js';
 
 export const gameData = (socket, dispatch, gameToken) => (
   state = {
     playerId: null,
     turn: 0,
+    colorsInBag: [],
     workshopsColor: [
-      ['blue', 'black', 'blue', 'white'],
       [false, false, false, false],
       [false, false, false, false],
       [false, false, false, false],
-      ['white', 'red', 'blue', 'white']
+      [false, false, false, false],
+      [false, false, false, false]
     ],
     rejectedSquares: {
       blue: 5,
@@ -120,6 +121,29 @@ export const gameData = (socket, dispatch, gameToken) => (
       socket.emit('start game', gameToken);
       return { ...state };
     }
+    case 'RANDOM_COLORS': {
+      const { colorsInBag, workshopsColor, players } = state;
+      const possibleColors = ['blue', 'yellow', 'red', 'black', 'white'];
+      const numOfWorkshops = players.length * 2 + 1;
+
+      if (
+        !workshopsColor.find(workshop => workshop.join() !== [false, false, false, false].join())
+      ) {
+        possibleColors.forEach(color => {
+          for (let i = 0; i < 20; i++) colorsInBag.push(color);
+        });
+      }
+      for (let i = 0; i < numOfWorkshops; i++) {
+        const col = [];
+        for (let j = 0; j < 4; j++) {
+          col.push(colorsInBag.splice(Math.floor(Math.random() * colorsInBag.length), 1)[0]);
+        }
+        workshopsColor.push(col);
+      }
+      workshopsColor.splice(0, numOfWorkshops);
+
+      return { ...state };
+    }
 
     case 'CHOOSE__WORKSHOP': {
       const { workshopsColor } = state;
@@ -216,9 +240,9 @@ export const gameData = (socket, dispatch, gameToken) => (
         !workshopsColor.find(workshop => workshop.join() !== [false, false, false, false].join()) &&
         !Object.entries(rejectedSquares).find(square => square[1] !== 0);
 
-      // if(isRoundEnded){
-      //   gameData |> updateGameData |> dispatch
-      // }
+      if (isRoundEnded && !playerId) {
+        setTimeout(() => dispatch(randomColors()), 0);
+      }
 
       socket.emit('gameData', gameToken, {
         rejectedSquares,

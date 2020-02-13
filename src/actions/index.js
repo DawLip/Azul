@@ -7,7 +7,7 @@ export const hostInit = () => ({
   type: 'HOST_INIT'
 });
 
-// game data
+// game data -----------------------------------
 export const updateGameData = gameData => ({
   type: 'UPDATE_GAME_DATA',
   gameData
@@ -18,7 +18,7 @@ export const initStartGame = id => ({
   id
 });
 
-//game
+// game ------------------------------------------
 export const chooseWorkshop = i => ({
   type: 'CHOOSE__WORKSHOP',
   workshopIndex: i
@@ -39,4 +39,8 @@ export const chooseSquareToCollectS = color => ({
 export const chooseRow = i => ({
   type: 'CHOOSE_ROW',
   rowIndex: i
+});
+
+export const randomColors = () => ({
+  type: 'RANDOM_COLORS'
 });
