@@ -3,6 +3,7 @@ import { updateGameData } from '../actions/index.js';
 export const gameData = (socket, dispatch, gameToken) => (
   state = {
     playerId: null,
+    turn: 0,
     workshopsColor: [
       ['blue', 'black', 'blue', 'white'],
       ['red', 'red', 'blue', 'white'],
@@ -119,6 +120,7 @@ export const gameData = (socket, dispatch, gameToken) => (
       socket.emit('start game', gameToken);
       return { ...state };
     }
+
     case 'CHOOSE__WORKSHOP': {
       const { workshopsColor } = state;
       const choosedWorkshop = workshopsColor.splice(workshopIndex, 1).flat();
@@ -131,13 +133,13 @@ export const gameData = (socket, dispatch, gameToken) => (
     }
 
     case 'CHOOSE_SQUARE_TO_COLLECT_W': {
-      const { workshopsColor, players, playerId } = state;
+      const { workshopsColor, players, playerId, turn } = state;
       const numOfWorkshops = players.length * 2;
       const player = players[playerId];
 
       console.log(player.negativeSquares);
 
-      if (!player.isChoosedSquareToCollect) {
+      if (!player.isChoosedSquareToCollect && turn % players.length === playerId) {
         const numOfChoosedSquares = workshopsColor[numOfWorkshops].filter(
           workshopColor => workshopColor === colorOfSquare
         ).length;
@@ -165,10 +167,10 @@ export const gameData = (socket, dispatch, gameToken) => (
     }
 
     case 'CHOOSE_SQUARE_TO_COLLECT_S': {
-      const { players, rejectedSquares, playerId } = state;
+      const { players, rejectedSquares, playerId, turn } = state;
       const player = players[playerId];
 
-      if (!player.isChoosedSquareToCollect) {
+      if (!player.isChoosedSquareToCollect && turn % players.length === playerId) {
         player.storedSquares.color = colorOfSquare;
         player.storedSquares.number = rejectedSquares[colorOfSquare];
         rejectedSquares[colorOfSquare] = 0;
@@ -181,7 +183,7 @@ export const gameData = (socket, dispatch, gameToken) => (
     }
 
     case 'CHOOSE_ROW': {
-      const { players, playerId, workshopsColor } = state;
+      const { players, playerId, workshopsColor, rejectedSquares } = state;
       const player = players[playerId]; //active player
       let { storedSquares } = player;
       const choosedRow = player.queue[rowIndex];
@@ -209,6 +211,13 @@ export const gameData = (socket, dispatch, gameToken) => (
       storedSquares.color = '';
       storedSquares.number = 0;
       player.isChoosedSquareToCollect = false;
+
+      socket.emit('gameData', gameToken, {
+        rejectedSquares,
+        players,
+        workshopsColor,
+        turn: ++state.turn
+      });
 
       return { ...state };
     }

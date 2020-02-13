@@ -1,41 +1,46 @@
+import socket from 'socket.io';
+const games = {};
 
-import socket from 'socket.io'
-const games = {}
+export default server => {
+  const io = socket(server);
+  const game = io.of('/game');
 
-export default (server) => {
-	const io = socket(server)
-	const game = io.of('/game')
+  game.on('connection', socket => {
+    socket.on('room', room => {
+      socket.join(room);
 
-	game.on('connection', socket => {
+      // create game
+      if (!games[`X${room}`])
+        games[`X${room}`] = {
+          status: 'in lobby',
+          playersIds: []
+        };
 
-		socket.on('room', room => {
-			socket.join(room)
+      // add player
+      const playerId =
+        games[`X${room}`].playersIds[games[`X${room}`].playersIds.length - 1] + 1 || 0;
 
-			// create game
-			if (!games[`X${room}`]) games[`X${room}`] = {
-				status: "in lobby",
-				playersIds: []
-			}
+      games[`X${room}`].playersIds.push(playerId);
 
-			// add player
-			const playerId = games[`X${room}`].playersIds[games[`X${room}`].playersIds.length - 1] + 1 || 0
+      socket.in(room).broadcast.emit('gameData', games[`X${room}`]);
+      socket.emit('gameData', {
+        ...games[`X${room}`],
+        room,
+        playerId
+      });
+    });
 
-			games[`X${room}`].playersIds.push(playerId)
+    socket.on('start game', room => {
+      console.log(`start game - ${room}`);
 
-			socket.in(room).broadcast.emit('gameData', games[`X${room}`])
-			socket.emit('gameData', {
-				...games[`X${room}`],
-				room,
-				playerId
-			})
+      socket.in(room).emit('gameData', { status: 'started' });
+      socket.emit('gameData', { status: 'started' });
+    });
 
-		});
+    socket.on('gameData', (room, gameData) => {
+      console.log(`update gameData: ${gameData}`);
 
-		socket.on('start game', room => {
-			console.log(`start game - ${room}`);
-
-			socket.in(room).emit('gameData', { status: "started" })
-			socket.emit('gameData', { status: "started" })
-		})
-	});
-}
+      socket.in(room).emit('gameData', gameData);
+    });
+  });
+};
