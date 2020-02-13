@@ -6,9 +6,9 @@ export const gameData = (socket, dispatch, gameToken) => (
     turn: 0,
     workshopsColor: [
       ['blue', 'black', 'blue', 'white'],
-      ['red', 'red', 'blue', 'white'],
-      ['red', 'red', 'blue', 'black'],
-      ['red', 'red', 'black', 'yellow'],
+      [false, false, false, false],
+      [false, false, false, false],
+      [false, false, false, false],
       ['white', 'red', 'blue', 'white']
     ],
     rejectedSquares: {
@@ -137,7 +137,7 @@ export const gameData = (socket, dispatch, gameToken) => (
       const numOfWorkshops = players.length * 2;
       const player = players[playerId];
 
-      console.log(player.negativeSquares);
+      console.log('negative squares: ', player.negativeSquares);
 
       if (!player.isChoosedSquareToCollect && turn % players.length === playerId) {
         const numOfChoosedSquares = workshopsColor[numOfWorkshops].filter(
@@ -211,6 +211,14 @@ export const gameData = (socket, dispatch, gameToken) => (
       storedSquares.color = '';
       storedSquares.number = 0;
       player.isChoosedSquareToCollect = false;
+
+      const isRoundEnded =
+        !workshopsColor.find(workshop => workshop.join() !== [false, false, false, false].join()) &&
+        !Object.entries(rejectedSquares).find(square => square[1] !== 0);
+
+      // if(isRoundEnded){
+      //   gameData |> updateGameData |> dispatch
+      // }
 
       socket.emit('gameData', gameToken, {
         rejectedSquares,
