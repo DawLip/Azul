@@ -25,11 +25,11 @@ class Workshops extends React.Component {
                     >
                       <div
                         className={`workshops__color 
-							${workshopsColor[i][0] ? `workshops__color--${workshopsColor[i][0]}` : ''}`}
+							            ${workshopsColor[i][0] ? `workshops__color--${workshopsColor[i][0]}` : ''}`}
                       ></div>
                       <div
                         className={`workshops__color 
-							${workshopsColor[i][1] ? `workshops__color--${workshopsColor[i][1]}` : ''}`}
+							            ${workshopsColor[i][1] ? `workshops__color--${workshopsColor[i][1]}` : ''}`}
                       ></div>
                       <div
                         className={`workshops__color ${

@@ -245,11 +245,23 @@ export const gameData = (socket, dispatch, gameToken) => (
 
       if (choosedRow.numberOfSquares === 0 || choosedRow.color === storedSquares.color) {
         choosedRow.color = storedSquares.color;
+        const beforeChoosedRowNumberOfSquares = choosedRow.numberOfSquares;
         choosedRow.numberOfSquares += storedSquares.number;
         if (choosedRow.numberOfSquares > rowIndex + 1) {
           choosedRow.numberOfSquares = rowIndex + 1;
           player.negativeSquares +=
-            storedSquares.number - rowIndex - 1 + choosedRow.numberOfSquares;
+            storedSquares.number -
+            (rowIndex + 1 - beforeChoosedRowNumberOfSquares) -
+            (rowIndex + 1) +
+            choosedRow.numberOfSquares;
+          console.log(
+            'test',
+            player.negativeSquares,
+            storedSquares.number,
+            beforeChoosedRowNumberOfSquares,
+            rowIndex + 1,
+            choosedRow.numberOfSquares
+          );
         }
       } else {
         player.negativeSquares += storedSquares.number;
