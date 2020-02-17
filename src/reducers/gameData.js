@@ -21,7 +21,7 @@ export const gameData = (socket, dispatch, gameToken) => (
     },
     players: [
       {
-        name: 'player1',
+        name: 'p1',
         points: 0,
         negativePoints: 0,
         negativeSquares: 0,
@@ -61,7 +61,7 @@ export const gameData = (socket, dispatch, gameToken) => (
         ]
       },
       {
-        name: 'player2',
+        name: 'p2',
         points: 0,
         negativePoints: 0,
         negativeSquares: 0,
@@ -123,8 +123,6 @@ export const gameData = (socket, dispatch, gameToken) => (
     }
 
     case 'RANDOM_COLORS': {
-      console.log('random colors');
-
       const { colorsInBag, workshopsColor, players } = state;
       const possibleColors = ['blue', 'yellow', 'red', 'black', 'white'];
       const numOfWorkshops = players.length * 2 + 1;
@@ -156,23 +154,22 @@ export const gameData = (socket, dispatch, gameToken) => (
     }
     case 'COUNT_POINTS': {
       const { players } = state;
-      const usedColors = [
-        'yellow',
-        'red',
-        'black',
-        'white',
-        'blue',
-        'yellow',
-        'red',
-        'black',
-        'white'
+      const colors = [
+        ['blue', 'yellow', 'red', 'black', 'white'],
+        ['white', 'blue', 'yellow', 'red', 'black'],
+        ['black', 'white', 'blue', 'yellow', 'red'],
+        ['red', 'black', 'white', 'blue', 'yellow'],
+        ['yellow', 'red', 'black', 'white', 'blue']
       ];
 
       players.forEach(({ queue, board }) => {
         queue.forEach((queueItem, index) => {
-          board[index][usedColors.findIndex(c => c == queueItem.color) - index] = queueItem.color;
+          if (queue[index].numberOfSquares === index + 1)
+            board[index][colors[index].findIndex(color => color === queueItem.color)] = true;
         });
       });
+
+      socket.emit('gameData', gameToken, { players });
 
       return { ...state };
     }
@@ -254,14 +251,6 @@ export const gameData = (socket, dispatch, gameToken) => (
             (rowIndex + 1 - beforeChoosedRowNumberOfSquares) -
             (rowIndex + 1) +
             choosedRow.numberOfSquares;
-          console.log(
-            'test',
-            player.negativeSquares,
-            storedSquares.number,
-            beforeChoosedRowNumberOfSquares,
-            rowIndex + 1,
-            choosedRow.numberOfSquares
-          );
         }
       } else {
         player.negativeSquares += storedSquares.number;
