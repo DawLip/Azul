@@ -12,7 +12,9 @@ import './interface.sass';
 
 class Game extends React.Component {
   componentDidMount = () => {
-    this.props.randomColors();
+    if (!this.props.gameData.playerId) {
+      this.props.randomColors();
+    }
   };
 
   render() {
@@ -29,7 +31,7 @@ class Game extends React.Component {
   }
 }
 
-const mapStateToProps = ({}) => ({});
+const mapStateToProps = ({ gameData }) => ({ gameData });
 const mapDispatchToProps = { randomColors };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

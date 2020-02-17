@@ -1,4 +1,4 @@
-import { updateGameData, randomColors } from '../actions/index.js';
+import { updateGameData, randomColors, countPoints } from '../actions/index.js';
 
 export const gameData = (socket, dispatch, gameToken) => (
   state = {
@@ -13,9 +13,9 @@ export const gameData = (socket, dispatch, gameToken) => (
       [false, false, false, false]
     ],
     rejectedSquares: {
-      blue: 5,
+      blue: 0,
       yellow: 0,
-      red: 2,
+      red: 0,
       black: 0,
       white: 0
     },
@@ -31,7 +31,7 @@ export const gameData = (socket, dispatch, gameToken) => (
         },
         isChoosedSquareToCollect: false,
         board: [
-          [false, true, false, true, false],
+          [false, false, false, false, false],
           [false, false, false, false, false],
           [false, false, false, false, false],
           [false, false, false, false, false],
@@ -44,19 +44,19 @@ export const gameData = (socket, dispatch, gameToken) => (
           },
           {
             numberOfSquares: 0,
-            color: 'red'
-          },
-          {
-            numberOfSquares: 3,
-            color: 'blue'
+            color: ''
           },
           {
             numberOfSquares: 0,
             color: ''
           },
           {
-            numberOfSquares: 2,
-            color: 'white'
+            numberOfSquares: 0,
+            color: ''
+          },
+          {
+            numberOfSquares: 0,
+            color: ''
           }
         ]
       },
@@ -121,7 +121,10 @@ export const gameData = (socket, dispatch, gameToken) => (
       socket.emit('start game', gameToken);
       return { ...state };
     }
+
     case 'RANDOM_COLORS': {
+      console.log('random colors');
+
       const { colorsInBag, workshopsColor, players } = state;
       const possibleColors = ['blue', 'yellow', 'red', 'black', 'white'];
       const numOfWorkshops = players.length * 2 + 1;
@@ -133,6 +136,7 @@ export const gameData = (socket, dispatch, gameToken) => (
           for (let i = 0; i < 20; i++) colorsInBag.push(color);
         });
       }
+
       for (let i = 0; i < numOfWorkshops; i++) {
         const col = [];
         for (let j = 0; j < 4; j++) {
@@ -140,11 +144,38 @@ export const gameData = (socket, dispatch, gameToken) => (
         }
         workshopsColor.push(col);
       }
+
       workshopsColor.splice(0, numOfWorkshops);
+
+      socket.emit('gameData', gameToken, {
+        colorsInBag,
+        workshopsColor
+      });
 
       return { ...state };
     }
+    case 'COUNT_POINTS': {
+      const { players } = state;
+      const usedColors = [
+        'yellow',
+        'red',
+        'black',
+        'white',
+        'blue',
+        'yellow',
+        'red',
+        'black',
+        'white'
+      ];
 
+      players.forEach(({ queue, board }) => {
+        queue.forEach((queueItem, index) => {
+          board[index][usedColors.findIndex(c => c == queueItem.color) - index] = queueItem.color;
+        });
+      });
+
+      return { ...state };
+    }
     case 'CHOOSE__WORKSHOP': {
       const { workshopsColor } = state;
       const choosedWorkshop = workshopsColor.splice(workshopIndex, 1).flat();
@@ -240,8 +271,11 @@ export const gameData = (socket, dispatch, gameToken) => (
         !workshopsColor.find(workshop => workshop.join() !== [false, false, false, false].join()) &&
         !Object.entries(rejectedSquares).find(square => square[1] !== 0);
 
-      if (isRoundEnded && !playerId) {
-        setTimeout(() => dispatch(randomColors()), 0);
+      if (isRoundEnded) {
+        setTimeout(() => {
+          dispatch(randomColors());
+          dispatch(countPoints());
+        }, 0);
       }
 
       socket.emit('gameData', gameToken, {

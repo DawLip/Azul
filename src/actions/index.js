@@ -44,3 +44,7 @@ export const chooseRow = i => ({
 export const randomColors = () => ({
   type: 'RANDOM_COLORS'
 });
+
+export const countPoints = () => ({
+  type: 'COUNT_POINTS'
+});
