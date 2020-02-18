@@ -320,8 +320,20 @@ export const gameData = (socket, dispatch, gameToken) => (
       const player = players[playerId]; //active player
       let { storedSquares } = player;
       const choosedRow = player.queue[rowIndex];
+      const colors = [
+        ['blue', 'yellow', 'red', 'black', 'white'],
+        ['white', 'blue', 'yellow', 'red', 'black'],
+        ['black', 'white', 'blue', 'yellow', 'red'],
+        ['red', 'black', 'white', 'blue', 'yellow'],
+        ['yellow', 'red', 'black', 'white', 'blue']
+      ];
+      const isSquareFinished =
+        player.board[rowIndex][colors[rowIndex].findIndex(color => color === storedSquares.color)];
 
-      if (choosedRow.numberOfSquares === 0 || choosedRow.color === storedSquares.color) {
+      if (
+        !isSquareFinished &&
+        (choosedRow.numberOfSquares === 0 || choosedRow.color === storedSquares.color)
+      ) {
         choosedRow.color = storedSquares.color;
         const beforeChoosedRowNumberOfSquares = choosedRow.numberOfSquares;
         choosedRow.numberOfSquares += storedSquares.number;
