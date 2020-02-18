@@ -162,11 +162,92 @@ export const gameData = (socket, dispatch, gameToken) => (
         ['yellow', 'red', 'black', 'white', 'blue']
       ];
 
-      players.forEach(({ queue, board }) => {
-        queue.forEach((queueItem, index) => {
-          if (queue[index].numberOfSquares === index + 1)
-            board[index][colors[index].findIndex(color => color === queueItem.color)] = true;
+      players.forEach(player => {
+        const { queue, board } = player;
+        const pointsToAdd = [];
+
+        queue.forEach((queueItem, rowIndex) => {
+          if (queue[rowIndex].numberOfSquares === rowIndex + 1) {
+            const colIndex = colors[rowIndex].findIndex(color => color === queueItem.color);
+            board[rowIndex][colIndex] = true;
+            queue[rowIndex].numberOfSquares = 0;
+            queue[rowIndex].color = '';
+
+            let neighborRowIndex = rowIndex - 1;
+            let neighborColIndex = colIndex;
+            pointsToAdd.push('');
+            let isChanging = true;
+            let wasChanging = false;
+
+            //check to up
+            while (isChanging) {
+              if (
+                board[neighborRowIndex]?.[neighborColIndex] !== undefined &&
+                board[neighborRowIndex]?.[neighborColIndex] != false
+              ) {
+                wasChanging = true;
+                console.log('add up');
+                pointsToAdd.push('');
+                neighborRowIndex--;
+              } else isChanging = false;
+            }
+            isChanging = true;
+            neighborRowIndex = rowIndex + 1;
+
+            //check to down
+            while (isChanging) {
+              if (
+                board[neighborRowIndex]?.[neighborColIndex] !== undefined &&
+                board[neighborRowIndex]?.[neighborColIndex] != false
+              ) {
+                wasChanging = true;
+                console.log('add down');
+                pointsToAdd.push('');
+                neighborRowIndex++;
+              } else isChanging = false;
+            }
+            isChanging = true;
+            neighborRowIndex = rowIndex;
+            neighborColIndex = colIndex - 1;
+
+            //check to left
+            while (isChanging) {
+              if (
+                board[neighborRowIndex]?.[neighborColIndex] !== undefined &&
+                board[neighborRowIndex]?.[neighborColIndex] != false
+              ) {
+                console.log('add left');
+                pointsToAdd.push('');
+                neighborColIndex--;
+                if (wasChanging) {
+                  wasChanging = false;
+                  pointsToAdd.push('');
+                }
+              } else isChanging = false;
+            }
+            isChanging = true;
+
+            //check to right
+            while (isChanging) {
+              if (
+                board[neighborRowIndex]?.[neighborColIndex] !== undefined &&
+                board[neighborRowIndex]?.[neighborColIndex] != false
+              ) {
+                console.log('add right');
+
+                pointsToAdd.push('');
+                neighborColIndex++;
+                if (wasChanging) {
+                  wasChanging = false;
+                  pointsToAdd.push('');
+                }
+              } else isChanging = false;
+            }
+          }
         });
+        player.points += pointsToAdd.length - player.negativePoints;
+        player.negativePoints = 0;
+        player.negativeSquares = 0;
       });
 
       socket.emit('gameData', gameToken, { players });
