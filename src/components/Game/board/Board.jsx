@@ -75,7 +75,13 @@ class Board extends React.Component {
           </div>
 
           <div className="board__collectedSquaresContainer">
-            <div className="board__negativePointsContainer">
+            <div
+              className={`board__negativePointsContainer ${
+                players[playerId].storedSquares.number
+                  ? `board__square--${players[playerId].storedSquares.color}`
+                  : ''
+              }`}
+            >
               <p className="board__negativePoints">{`${
                 players[playerId].negativePoints ? '-' : ''
               }${players[playerId].negativePoints}`}</p>

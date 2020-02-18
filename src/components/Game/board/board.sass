@@ -9,24 +9,6 @@
     +board($boardSize)
 //
 
-//Squares
-.board__square
-    +square($squareSize)
-    opacity: 0.3
-.board__square--blue
-    background-color: #00A3FF
-.board__square--yellow
-    background-color: #FAFF00
-.board__square--red
-    background-color: #FF0000
-.board__square--black
-    background-color: #2f7c2c
-.board__square--white
-    background-color: #ffffff
-.board__square--active
-    opacity: 1
-//
-
 //Colected squares
 .board__collectedSquaresContainer
     +colSqrCont($boardSize)
@@ -67,4 +49,24 @@
 .board__negativePoints
     text-align: center
 //
+
+//Squares
+.board__square
+    +square($squareSize)
+    opacity: 0.3
+.board__square--blue
+    background-color: #00A3FF
+.board__square--yellow
+    background-color: #FAFF00
+.board__square--red
+    background-color: #FF0000
+.board__square--black
+    background-color: #2f7c2c
+.board__square--white
+    background-color: #ffffff
+    color: black
+.board__square--active
+    opacity: 1
+//
+
 @import ../sass/_media
