@@ -152,6 +152,7 @@ export const gameData = (socket, dispatch, gameToken) => (
 
       return { ...state };
     }
+
     case 'COUNT_POINTS': {
       const { players } = state;
       const colors = [
@@ -262,6 +263,7 @@ export const gameData = (socket, dispatch, gameToken) => (
 
       return { ...state };
     }
+
     case 'CHOOSE__WORKSHOP': {
       const { workshopsColor } = state;
       const choosedWorkshop = workshopsColor.splice(workshopIndex, 1).flat();
@@ -280,7 +282,11 @@ export const gameData = (socket, dispatch, gameToken) => (
 
       console.log('negative squares: ', player.negativeSquares);
 
-      if (!player.isChoosedSquareToCollect && turn % players.length === playerId) {
+      if (
+        !player.isChoosedSquareToCollect &&
+        turn % players.length === playerId &&
+        workshopsColor[workshopsColor.length - 1][0]
+      ) {
         const numOfChoosedSquares = workshopsColor[numOfWorkshops].filter(
           workshopColor => workshopColor === colorOfSquare
         ).length;
@@ -311,7 +317,11 @@ export const gameData = (socket, dispatch, gameToken) => (
       const { players, rejectedSquares, playerId, turn } = state;
       const player = players[playerId];
 
-      if (!player.isChoosedSquareToCollect && turn % players.length === playerId) {
+      if (
+        !player.isChoosedSquareToCollect &&
+        turn % players.length === playerId &&
+        rejectedSquares[colorOfSquare]
+      ) {
         player.storedSquares.color = colorOfSquare;
         player.storedSquares.number = rejectedSquares[colorOfSquare];
         rejectedSquares[colorOfSquare] = 0;
@@ -324,7 +334,7 @@ export const gameData = (socket, dispatch, gameToken) => (
     }
 
     case 'CHOOSE_ROW': {
-      const { players, playerId, workshopsColor, rejectedSquares } = state;
+      const { players, playerId, workshopsColor, rejectedSquares, colorsInBag } = state;
       const player = players[playerId]; //active player
       let { storedSquares } = player;
       const choosedRow = player.queue[rowIndex];
@@ -338,55 +348,66 @@ export const gameData = (socket, dispatch, gameToken) => (
       const isSquareFinished =
         player.board[rowIndex][colors[rowIndex].findIndex(color => color === storedSquares.color)];
 
-      if (
-        !isSquareFinished &&
-        (choosedRow.numberOfSquares === 0 || choosedRow.color === storedSquares.color)
-      ) {
-        choosedRow.color = storedSquares.color;
-        const beforeChoosedRowNumberOfSquares = choosedRow.numberOfSquares;
-        choosedRow.numberOfSquares += storedSquares.number;
-        if (choosedRow.numberOfSquares > rowIndex + 1) {
-          choosedRow.numberOfSquares = rowIndex + 1;
-          player.negativeSquares +=
-            storedSquares.number -
-            (rowIndex + 1 - beforeChoosedRowNumberOfSquares) -
-            (rowIndex + 1) +
-            choosedRow.numberOfSquares;
+      if (storedSquares.number) {
+        let negativeSquaresToAdd = 0;
+        if (
+          !isSquareFinished &&
+          (choosedRow.numberOfSquares === 0 || choosedRow.color === storedSquares.color)
+        ) {
+          choosedRow.color = storedSquares.color;
+          const beforeChoosedRowNumberOfSquares = choosedRow.numberOfSquares;
+          choosedRow.numberOfSquares += storedSquares.number;
+
+          if (choosedRow.numberOfSquares > rowIndex + 1) {
+            choosedRow.numberOfSquares = rowIndex + 1;
+
+            negativeSquaresToAdd =
+              storedSquares.number -
+              (rowIndex + 1 - beforeChoosedRowNumberOfSquares) -
+              (rowIndex + 1) +
+              choosedRow.numberOfSquares;
+          }
+        } else {
+          negativeSquaresToAdd = storedSquares.number;
         }
-      } else {
-        player.negativeSquares += storedSquares.number;
+        player.negativeSquares += negativeSquaresToAdd;
+        console.log(player.negativeSquares);
+
+        for (let i = 0; i < negativeSquaresToAdd; i++) {
+          colorsInBag.push(storedSquares.color);
+        }
+        console.log(colorsInBag);
+
+        if (player.negativeSquares > 0) {
+          if (player.negativeSquares <= 2) player.negativePoints = player.negativeSquares;
+          else if (player.negativeSquares <= 5)
+            player.negativePoints = (player.negativeSquares - 2) * 2 + 2;
+          else player.negativePoints = (player.negativeSquares - 5) * 3 + 8;
+        } else player.negativePoints = 0;
+
+        storedSquares.color = '';
+        storedSquares.number = 0;
+        player.isChoosedSquareToCollect = false;
+
+        const isRoundEnded =
+          !workshopsColor.find(
+            workshop => workshop.join() !== [false, false, false, false].join()
+          ) && !Object.entries(rejectedSquares).find(square => square[1] !== 0);
+
+        if (isRoundEnded) {
+          setTimeout(() => {
+            dispatch(randomColors());
+            dispatch(countPoints());
+          }, 0);
+        }
+
+        socket.emit('gameData', gameToken, {
+          rejectedSquares,
+          players,
+          workshopsColor,
+          turn: ++state.turn
+        });
       }
-      console.log(player.negativeSquares);
-
-      if (player.negativeSquares > 0) {
-        if (player.negativeSquares <= 2) player.negativePoints = player.negativeSquares;
-        else if (player.negativeSquares <= 5)
-          player.negativePoints = (player.negativeSquares - 2) * 2 + 2;
-        else player.negativePoints = (player.negativeSquares - 5) * 3 + 8;
-      } else player.negativePoints = 0;
-
-      storedSquares.color = '';
-      storedSquares.number = 0;
-      player.isChoosedSquareToCollect = false;
-
-      const isRoundEnded =
-        !workshopsColor.find(workshop => workshop.join() !== [false, false, false, false].join()) &&
-        !Object.entries(rejectedSquares).find(square => square[1] !== 0);
-
-      if (isRoundEnded) {
-        setTimeout(() => {
-          dispatch(randomColors());
-          dispatch(countPoints());
-        }, 0);
-      }
-
-      socket.emit('gameData', gameToken, {
-        rejectedSquares,
-        players,
-        workshopsColor,
-        turn: ++state.turn
-      });
-
       return { ...state };
     }
 
