@@ -166,6 +166,8 @@ export const gameData = (socket, dispatch, gameToken) => (
         const { queue, board } = player;
         const pointsToAdd = [];
 
+        console.log('------------------');
+
         queue.forEach((queueItem, rowIndex) => {
           if (queue[rowIndex].numberOfSquares === rowIndex + 1) {
             const colIndex = colors[rowIndex].findIndex(color => color === queueItem.color);
@@ -226,6 +228,7 @@ export const gameData = (socket, dispatch, gameToken) => (
               } else isChanging = false;
             }
             isChanging = true;
+            neighborColIndex = colIndex + 1;
 
             //check to right
             while (isChanging) {
@@ -245,7 +248,12 @@ export const gameData = (socket, dispatch, gameToken) => (
             }
           }
         });
+        console.log(player.points, ' before');
+
         player.points += pointsToAdd.length - player.negativePoints;
+
+        console.log(player.points, ' after');
+
         player.negativePoints = 0;
         player.negativeSquares = 0;
       });
