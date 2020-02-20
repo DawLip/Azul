@@ -74,7 +74,7 @@ export const gameData = (socket, dispatch, gameToken) => (
         isChoosedSquareToCollect: false,
         board: [
           [false, false, false, false, false],
-          [false, false, false, false, false],
+          [true, true, true, true, false],
           [false, false, false, false, false],
           [false, false, false, false, false],
           [false, false, false, false, false]
@@ -251,12 +251,13 @@ export const gameData = (socket, dispatch, gameToken) => (
             }
           }
         });
-        console.log(player.points, ' before');
+
+        //check if game end
+        board.forEach(row => {
+          if (row.filter(cell => cell).length === 5) state.status = 'ended';
+        });
 
         player.points += pointsToAdd.length - player.negativePoints;
-
-        console.log(player.points, ' after');
-
         player.negativePoints = 0;
         player.negativeSquares = 0;
       });
@@ -264,7 +265,7 @@ export const gameData = (socket, dispatch, gameToken) => (
       state.turn = nextRoundFirstPlayer;
       rejectedSquares.firstPlayer = 1;
 
-      socket.emit('gameData', gameToken, { players });
+      socket.emit('gameData', gameToken, { players, status: state.status });
 
       return { ...state };
     }
