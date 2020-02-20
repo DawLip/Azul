@@ -383,6 +383,12 @@ export const gameData = (socket, dispatch, gameToken) => (
           else player.negativePoints = (player.negativeSquares - 5) * 3 + 8;
         } else player.negativePoints = 0;
 
+        if (choosedRow.numberOfSquares >= rowIndex + 1) {
+          for (let i = 0; i < rowIndex; i++) {
+            colorsInBag.push(choosedRow.color);
+          }
+        }
+
         storedSquares.color = '';
         storedSquares.number = 0;
         player.isChoosedSquareToCollect = false;
