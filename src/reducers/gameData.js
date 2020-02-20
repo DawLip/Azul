@@ -371,12 +371,10 @@ export const gameData = (socket, dispatch, gameToken) => (
           negativeSquaresToAdd = storedSquares.number;
         }
         player.negativeSquares += negativeSquaresToAdd;
-        console.log(player.negativeSquares);
 
         for (let i = 0; i < negativeSquaresToAdd; i++) {
           colorsInBag.push(storedSquares.color);
         }
-        console.log(colorsInBag);
 
         if (player.negativeSquares > 0) {
           if (player.negativeSquares <= 2) player.negativePoints = player.negativeSquares;
@@ -405,7 +403,8 @@ export const gameData = (socket, dispatch, gameToken) => (
           rejectedSquares,
           players,
           workshopsColor,
-          turn: ++state.turn
+          turn: ++state.turn,
+          colorsInBag
         });
       }
       return { ...state };
