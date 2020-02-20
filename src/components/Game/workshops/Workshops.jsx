@@ -171,13 +171,13 @@ class Workshops extends React.Component {
               >
                 {rejectedSquares.white ? rejectedSquares.white : ''}
               </div>
-              {/* <div
-					className={`workshops__rejectedSquare ${
-					  rejectedSquares[5].number ? `workshops__color--${rejectedSquares[5].color}` : ''
-					}`}
-				  >
-					{rejectedSquares[5].number ? rejectedSquares[5].number : ''}
-				  </div> */}
+              <div
+                className={`workshops__rejectedSquare ${
+                  rejectedSquares.firstPlayer ? `workshops__color--firstPlayer` : ''
+                }`}
+              >
+                {rejectedSquares.firstPlayer ? rejectedSquares.firstPlayer : ''}
+              </div>
             </div>
           </div>
         </section>

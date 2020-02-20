@@ -5,6 +5,7 @@ export const gameData = (socket, dispatch, gameToken) => (
     playerId: null,
     turn: 0,
     colorsInBag: [],
+    nextRoundFirstPlayer: 0,
     workshopsColor: [
       [false, false, false, false],
       [false, false, false, false],
@@ -17,7 +18,8 @@ export const gameData = (socket, dispatch, gameToken) => (
       yellow: 0,
       red: 0,
       black: 0,
-      white: 0
+      white: 0,
+      firstPlayer: 1
     },
     players: [
       {
@@ -154,7 +156,7 @@ export const gameData = (socket, dispatch, gameToken) => (
     }
 
     case 'COUNT_POINTS': {
-      const { players } = state;
+      const { players, nextRoundFirstPlayer, rejectedSquares } = state;
       const colors = [
         ['blue', 'yellow', 'red', 'black', 'white'],
         ['white', 'blue', 'yellow', 'red', 'black'],
@@ -259,6 +261,9 @@ export const gameData = (socket, dispatch, gameToken) => (
         player.negativeSquares = 0;
       });
 
+      state.turn = nextRoundFirstPlayer;
+      rejectedSquares.firstPlayer = 1;
+
       socket.emit('gameData', gameToken, { players });
 
       return { ...state };
@@ -316,6 +321,12 @@ export const gameData = (socket, dispatch, gameToken) => (
     case 'CHOOSE_SQUARE_TO_COLLECT_S': {
       const { players, rejectedSquares, playerId, turn } = state;
       const player = players[playerId];
+
+      if (rejectedSquares.firstPlayer) {
+        rejectedSquares.firstPlayer = 0;
+        player.negativeSquares++;
+        state.nextRoundFirstPlayer = playerId;
+      }
 
       if (
         !player.isChoosedSquareToCollect &&
