@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
+import Board from '../board/Board.jsx';
 // import { createPawns, playerMove, selectPawn, checkMoveOption } from '../../actions';
 
 import './bottom.sass';
@@ -14,71 +15,7 @@ class Bottom extends React.Component {
             <p className="bottom__enemyName">Player1</p>
           </div>
 
-          <div className="bottom__enemyBoardContainer">
-            <div className="bottom__enemyBoard">
-              <div className="bottom__enemySquare bottom__square--blue"></div>
-              <div className="bottom__enemySquare bottom__square--yellow"></div>
-              <div className="bottom__enemySquare bottom__square--red"></div>
-              <div className="bottom__enemySquare bottom__square--black"></div>
-              <div className="bottom__enemySquare bottom__square--white"></div>
-              <div className="bottom__enemySquare bottom__square--white"></div>
-              <div className="bottom__enemySquare bottom__square--blue"></div>
-              <div className="bottom__enemySquare bottom__square--yellow"></div>
-              <div className="bottom__enemySquare bottom__square--red"></div>
-              <div className="bottom__enemySquare bottom__square--black"></div>
-              <div className="bottom__enemySquare bottom__square--black"></div>
-              <div className="bottom__enemySquare bottom__square--white"></div>
-              <div className="bottom__enemySquare bottom__square--blue"></div>
-              <div className="bottom__enemySquare bottom__square--yellow"></div>
-              <div className="bottom__enemySquare bottom__square--red"></div>
-              <div className="bottom__enemySquare bottom__square--red"></div>
-              <div className="bottom__enemySquare bottom__square--black"></div>
-              <div className="bottom__enemySquare bottom__square--white"></div>
-              <div className="bottom__enemySquare bottom__square--blue"></div>
-              <div className="bottom__enemySquare bottom__square--yellow"></div>
-              <div className="bottom__enemySquare bottom__square--yellow"></div>
-              <div className="bottom__enemySquare bottom__square--red"></div>
-              <div className="bottom__enemySquare bottom__square--black"></div>
-              <div className="bottom__enemySquare bottom__square--white"></div>
-              <div className="bottom__enemySquare bottom__square--blue"></div>
-            </div>
-
-            <div className="bottom__enemyCollectedSquaresContainer">
-              <div className="bottom__enemyNegativePointsContainer">
-                <p className="bottom__enemyNegativePoints">-6</p>
-              </div>
-
-              <div className="bottom__collectedSquaresRow">
-                <div className="bottom__enemyCollectedSquares"></div>
-              </div>
-
-              <div className="bottom__collectedSquaresRow">
-                <div className="bottom__enemyCollectedSquares"></div>
-                <div className="bottom__enemyCollectedSquares"></div>
-              </div>
-
-              <div className="bottom__collectedSquaresRow">
-                <div className="bottom__enemyCollectedSquares"></div>
-                <div className="bottom__enemyCollectedSquares"></div>
-                <div className="bottom__enemyCollectedSquares"></div>
-              </div>
-
-              <div className="bottom__collectedSquaresRow">
-                <div className="bottom__enemyCollectedSquares"></div>
-                <div className="bottom__enemyCollectedSquares"></div>
-                <div className="bottom__enemyCollectedSquares"></div>
-                <div className="bottom__enemyCollectedSquares"></div>
-              </div>
-
-              <div className="bottom__collectedSquaresRow">
-                <div className="bottom__enemyCollectedSquares"></div>
-                <div className="bottom__enemyCollectedSquares"></div>
-                <div className="bottom__enemyCollectedSquares"></div>
-                <div className="bottom__enemyCollectedSquares"></div>
-                <div className="bottom__enemyCollectedSquares"></div>
-              </div>
-            </div>
-          </div>
+          <Board />
         </div>
 
         <div className="bottom__playersContainer">
