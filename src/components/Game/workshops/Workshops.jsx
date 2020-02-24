@@ -175,9 +175,7 @@ class Workshops extends React.Component {
                 className={`workshops__rejectedSquare ${
                   rejectedSquares.firstPlayer ? `workshops__color--firstPlayer` : ''
                 }`}
-              >
-                {rejectedSquares.firstPlayer ? rejectedSquares.firstPlayer : ''}
-              </div>
+              ></div>
             </div>
           </div>
         </section>

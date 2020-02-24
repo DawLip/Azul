@@ -5,7 +5,21 @@ import { socketioInit } from '../../../actions';
 
 class GameIsEnded extends React.Component {
   render() {
-    return <p>KONIEC GRY</p>;
+    const { players } = this.props.gameData;
+    const playersPoints = [];
+    players.forEach(player => {
+      playersPoints.push(
+        <p>
+          {player.name}: {player.points} punktów
+        </p>
+      );
+    });
+    return (
+      <>
+        <p>KONIEC GRY</p>
+        <div>{playersPoints}</div>
+      </>
+    );
   }
 }
 

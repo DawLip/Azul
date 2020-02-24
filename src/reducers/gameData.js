@@ -74,7 +74,7 @@ export const gameData = (socket, dispatch, gameToken) => (
         isChoosedSquareToCollect: false,
         board: [
           [false, false, false, false, false],
-          [true, true, true, true, false],
+          [false, false, false, false, false],
           [false, false, false, false, false],
           [false, false, false, false, false],
           [false, false, false, false, false]
