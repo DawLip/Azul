@@ -7,7 +7,9 @@ import './board.sass';
 
 class Board extends React.Component {
   render() {
-    const { players, playerId } = this.props.gameData;
+    console.log(this.props.playerId);
+
+    const { players } = this.props.gameData;
     const colors = [
       'blue',
       'yellow',
@@ -46,9 +48,9 @@ class Board extends React.Component {
               collectedSquares.push(
                 <div
                   className={`board__collectedSquares ${
-                    players[playerId].queue[i].color &&
-                    players[playerId].queue[i].numberOfSquares > j
-                      ? `board__collectedSquares--${players[playerId].queue[i].color}`
+                    players[this.props.playerId].queue[i].color &&
+                    players[this.props.playerId].queue[i].numberOfSquares > j
+                      ? `board__collectedSquares--${players[this.props.playerId].queue[i].color}`
                       : ''
                   }`}
                 ></div>
@@ -64,7 +66,7 @@ class Board extends React.Component {
       <>
         <section className="board">
           <div className="board__playerBoard">
-            {players[playerId].board.flat().map((isActive, index) => (
+            {players[this.props.playerId].board.flat().map((isActive, index) => (
               <div
                 className={`
                 board__square board__square--${colors[index]} 
@@ -77,14 +79,14 @@ class Board extends React.Component {
           <div className="board__collectedSquaresContainer">
             <div
               className={`board__negativePointsContainer ${
-                players[playerId].storedSquares.number
-                  ? `board__square--${players[playerId].storedSquares.color}`
+                players[this.props.playerId].storedSquares.number
+                  ? `board__square--${players[this.props.playerId].storedSquares.color}`
                   : ''
               }`}
             >
               <p className="board__negativePoints">{`${
-                players[playerId].negativePoints ? '-' : ''
-              }${players[playerId].negativePoints}`}</p>
+                players[this.props.playerId].negativePoints ? '-' : ''
+              }${players[this.props.playerId].negativePoints}`}</p>
             </div>
             {collectedSquares}
           </div>

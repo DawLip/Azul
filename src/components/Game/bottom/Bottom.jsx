@@ -8,6 +8,10 @@ import './bottom.sass';
 
 class Bottom extends React.Component {
   render() {
+    const { turn, players, playerId } = this.props.gameData;
+    const idOfPlayerWhoseIsTurn = turn % players.length;
+    const idOfShowingPlayer =
+      idOfPlayerWhoseIsTurn === playerId ? (turn + 1) % players.length : idOfPlayerWhoseIsTurn;
     return (
       <section className="bottom">
         <div className="bottom__enemyContainer">
@@ -15,7 +19,7 @@ class Bottom extends React.Component {
             <p className="bottom__enemyName">Player1</p>
           </div>
 
-          <Board />
+          <Board playerId={idOfShowingPlayer} />
         </div>
 
         <div className="bottom__playersContainer">

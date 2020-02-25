@@ -18,11 +18,13 @@ class Game extends React.Component {
   };
 
   render() {
+    console.log('interface', this.props.gameData.playerId);
+
     return (
       <div className="wrapper">
         <main className="main">
           <Workshops />
-          <Board />
+          <Board playerId={this.props.gameData.playerId} />
           <Bottom />
         </main>
         <RotateWarning />
