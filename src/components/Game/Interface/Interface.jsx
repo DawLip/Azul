@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { randomColors } from '../../../actions';
+import { randomColors, createPlayer } from '../../../actions';
 
 import Workshops from '../workshops/Workshops.jsx';
 import Board from '../board/Board.jsx';
@@ -11,7 +11,8 @@ import RotateWarning from '../rotateWarning/RotateWarning.jsx';
 import './interface.sass';
 
 class Game extends React.Component {
-  componentDidMount = () => {
+  componentWillMount = () => {
+    this.props.createPlayer();
     if (!this.props.gameData.playerId) {
       this.props.randomColors();
     }
@@ -34,6 +35,6 @@ class Game extends React.Component {
 }
 
 const mapStateToProps = ({ gameData }) => ({ gameData });
-const mapDispatchToProps = { randomColors };
+const mapDispatchToProps = { randomColors, createPlayer };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

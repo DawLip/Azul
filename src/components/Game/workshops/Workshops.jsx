@@ -59,20 +59,24 @@ class Workshops extends React.Component {
                     >
                       <div
                         className={`workshops__color 
-							${workshopsColor[i][0] ? `workshops__color--${workshopsColor[i][0]}` : ''}`}
+							${workshopsColor[i]?.[0] ? `workshops__color--${workshopsColor[i]?.[0]}` : ''}`}
                       ></div>
                       <div
                         className={`workshops__color 
-							${workshopsColor[i][1] ? `workshops__color--${workshopsColor[i][1]}` : ''}`}
+							${workshopsColor[i]?.[1] ? `workshops__color--${workshopsColor[i]?.[1]}` : ''}`}
                       ></div>
                       <div
                         className={`workshops__color ${
-                          workshopsColor[i][2] ? `workshops__color--${workshopsColor[i][2]}` : ''
+                          workshopsColor[i]?.[2]
+                            ? `workshops__color--${workshopsColor[i]?.[2]}`
+                            : ''
                         }`}
                       ></div>
                       <div
                         className={`workshops__color ${
-                          workshopsColor[i][3] ? `workshops__color--${workshopsColor[i][3]}` : ''
+                          workshopsColor[i]?.[3]
+                            ? `workshops__color--${workshopsColor[i]?.[3]}`
+                            : ''
                         }`}
                       ></div>
                     </div>
@@ -117,38 +121,38 @@ class Workshops extends React.Component {
                   this.props.chooseSquareToCollectW(workshopsColor[numOfWorkshops - 1][0])
                 }
                 className={`workshops__color ${
-                  workshopsColor[numOfWorkshops - 1][0]
-                    ? `workshops__color--${workshopsColor[numOfWorkshops - 1][0]}`
+                  workshopsColor[numOfWorkshops - 1]?.[0]
+                    ? `workshops__color--${workshopsColor[numOfWorkshops - 1]?.[0]}`
                     : ''
                 }`}
               ></div>
               <div
                 onClick={() =>
-                  this.props.chooseSquareToCollectW(workshopsColor[numOfWorkshops - 1][1])
+                  this.props.chooseSquareToCollectW(workshopsColor[numOfWorkshops - 1]?.[1])
                 }
                 className={`workshops__color ${
-                  workshopsColor[numOfWorkshops - 1][1]
-                    ? `workshops__color--${workshopsColor[numOfWorkshops - 1][1]}`
+                  workshopsColor[numOfWorkshops - 1]?.[1]
+                    ? `workshops__color--${workshopsColor[numOfWorkshops - 1]?.[1]}`
                     : ''
                 }`}
               ></div>
               <div
                 onClick={() =>
-                  this.props.chooseSquareToCollectW(workshopsColor[numOfWorkshops - 1][2])
+                  this.props.chooseSquareToCollectW(workshopsColor[numOfWorkshops - 1]?.[2])
                 }
                 className={`workshops__color ${
-                  workshopsColor[numOfWorkshops - 1][2]
-                    ? `workshops__color--${workshopsColor[numOfWorkshops - 1][2]}`
+                  workshopsColor[numOfWorkshops - 1]?.[2]
+                    ? `workshops__color--${workshopsColor[numOfWorkshops - 1]?.[2]}`
                     : ''
                 }`}
               ></div>
               <div
                 onClick={() =>
-                  this.props.chooseSquareToCollectW(workshopsColor[numOfWorkshops - 1][3])
+                  this.props.chooseSquareToCollectW(workshopsColor[numOfWorkshops - 1]?.[3])
                 }
                 className={`workshops__color ${
-                  workshopsColor[numOfWorkshops - 1][3]
-                    ? `workshops__color--${workshopsColor[numOfWorkshops - 1][3]}`
+                  workshopsColor[numOfWorkshops - 1]?.[3]
+                    ? `workshops__color--${workshopsColor[numOfWorkshops - 1]?.[3]}`
                     : ''
                 }`}
               ></div>

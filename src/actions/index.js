@@ -45,6 +45,10 @@ export const randomColors = () => ({
   type: 'RANDOM_COLORS'
 });
 
+export const createPlayer = () => ({
+  type: 'CREATE_PLAYER'
+});
+
 export const countPoints = () => ({
   type: 'COUNT_POINTS'
 });

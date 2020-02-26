@@ -6,13 +6,7 @@ export const gameData = (socket, dispatch, gameToken) => (
     turn: 0,
     colorsInBag: [],
     nextRoundFirstPlayer: 0,
-    workshopsColor: [
-      [false, false, false, false],
-      [false, false, false, false],
-      [false, false, false, false],
-      [false, false, false, false],
-      [false, false, false, false]
-    ],
+    workshopsColor: [],
     rejectedSquares: {
       blue: 0,
       yellow: 0,
@@ -21,88 +15,7 @@ export const gameData = (socket, dispatch, gameToken) => (
       white: 0,
       firstPlayer: 1
     },
-    players: [
-      {
-        name: 'p1',
-        points: 0,
-        negativePoints: 0,
-        negativeSquares: 0,
-        storedSquares: {
-          color: '',
-          number: 0
-        },
-        isChoosedSquareToCollect: false,
-        board: [
-          [false, false, false, false, false],
-          [false, false, false, false, false],
-          [false, false, false, false, false],
-          [false, false, false, false, false],
-          [false, false, false, false, false]
-        ],
-        queue: [
-          {
-            numberOfSquares: 0,
-            color: ''
-          },
-          {
-            numberOfSquares: 0,
-            color: ''
-          },
-          {
-            numberOfSquares: 0,
-            color: ''
-          },
-          {
-            numberOfSquares: 0,
-            color: ''
-          },
-          {
-            numberOfSquares: 0,
-            color: ''
-          }
-        ]
-      },
-      {
-        name: 'p2',
-        points: 0,
-        negativePoints: 0,
-        negativeSquares: 0,
-        storedSquares: {
-          color: '',
-          number: 0
-        },
-        isChoosedSquareToCollect: false,
-        board: [
-          [false, false, false, false, false],
-          [false, false, false, false, false],
-          [false, false, false, false, false],
-          [false, false, false, false, false],
-          [false, false, false, false, false]
-        ],
-        queue: [
-          {
-            numberOfSquares: 0,
-            color: ''
-          },
-          {
-            numberOfSquares: 0,
-            color: ''
-          },
-          {
-            numberOfSquares: 0,
-            color: ''
-          },
-          {
-            numberOfSquares: 0,
-            color: ''
-          },
-          {
-            numberOfSquares: 0,
-            color: ''
-          }
-        ]
-      }
-    ]
+    players: [{ name: 'p1' }, { name: 'p2' }, { name: 'p2' }, { name: 'p2' }]
   },
   { type, workshopIndex, colorOfSquare, rowIndex, gameData }
 ) => {
@@ -121,6 +34,59 @@ export const gameData = (socket, dispatch, gameToken) => (
 
     case 'INIT_START_GAME': {
       socket.emit('start game', gameToken);
+      return { ...state };
+    }
+
+    case 'CREATE_PLAYER': {
+      const { players, workshopsColor } = state;
+
+      for (let i = 0; i < players.length * 2 + 1; i++) {
+        workshopsColor.push([false, false, false, false]);
+      }
+
+      players.forEach((player, index) => {
+        players[index] = {
+          ...player,
+          points: 0,
+          negativePoints: 0,
+          negativeSquares: 0,
+          storedSquares: {
+            color: '',
+            number: 0
+          },
+          isChoosedSquareToCollect: false,
+          board: [
+            [false, false, false, false, false],
+            [false, false, false, false, false],
+            [false, false, false, false, false],
+            [false, false, false, false, false],
+            [false, false, false, false, false]
+          ],
+          queue: [
+            {
+              numberOfSquares: 0,
+              color: ''
+            },
+            {
+              numberOfSquares: 0,
+              color: ''
+            },
+            {
+              numberOfSquares: 0,
+              color: ''
+            },
+            {
+              numberOfSquares: 0,
+              color: ''
+            },
+            {
+              numberOfSquares: 0,
+              color: ''
+            }
+          ]
+        };
+      });
+
       return { ...state };
     }
 
@@ -174,7 +140,7 @@ export const gameData = (socket, dispatch, gameToken) => (
         queue.forEach((queueItem, rowIndex) => {
           if (queue[rowIndex].numberOfSquares === rowIndex + 1) {
             const colIndex = colors[rowIndex].findIndex(color => color === queueItem.color);
-            board[rowIndex][colIndex] = true;
+            board[rowIndex][colIndex] = queueItem.color;
             queue[rowIndex].numberOfSquares = 0;
             queue[rowIndex].color = '';
 
