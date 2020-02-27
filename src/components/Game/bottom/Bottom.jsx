@@ -2,7 +2,6 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 import Board from '../board/Board.jsx';
-// import { createPawns, playerMove, selectPawn, checkMoveOption } from '../../actions';
 
 import './bottom.sass';
 
@@ -16,9 +15,8 @@ class Bottom extends React.Component {
       <section className="bottom">
         <div className="bottom__enemyContainer">
           <div className="bottom__enemyNameContainer">
-            <p className="bottom__enemyName">Player1</p>
+            <p className="bottom__enemyName">{players[idOfShowingPlayer].name}</p>
           </div>
-
           <Board playerId={idOfShowingPlayer} />
         </div>
 
@@ -26,8 +24,8 @@ class Bottom extends React.Component {
           <div className="bottom__players">
             {this.props.gameData.players.map(player => (
               <p className="bottom__player">
-                <span className="bottom__playerPoints">{player.points}</span>
-                {player.name}
+                <span className="bottom__playerPoints">{player.name}</span>
+                {player.points}
               </p>
             ))}
           </div>

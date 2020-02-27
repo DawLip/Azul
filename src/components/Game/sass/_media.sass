@@ -5,7 +5,7 @@
         display: block
 
 @media (max-width: 321px) //Small phones
-    
+
     //Variables
     $boardSize : 200px
     $enemyBoardSize : 120px
@@ -18,14 +18,15 @@
         +board($boardSize)
     .board__square
         +square($squareSize)
-    .bottom__enemyBoard
-        +board($enemyBoardSize)
-    .bottom__enemySquare
-        +square($enemySquareSize)
     .board__collectedSquaresContainer
         +colSqrCont($boardSize)
-    .bottom__enemyCollectedSquaresContainer
-        +colSqrCont($enemyBoardSize)
+    .bottom__enemyContainer
+        .board__playerBoard
+            +board($enemyBoardSize)
+        .board__square
+            +square($enemySquareSize)
+        .board__collectedSquaresContainer
+            +colSqrCont($enemyBoardSize)
     //
 
     //Top
@@ -52,14 +53,15 @@
         +board($boardSize)
     .board__square
         +square($squareSize)
-    .bottom__enemyBoard
-        +board($enemyBoardSize)
-    .bottom__enemySquare
-        +square($enemySquareSize)
     .board__collectedSquaresContainer
         +colSqrCont($boardSize)
-    .bottom__enemyCollectedSquaresContainer
-        +colSqrCont($enemyBoardSize)
+    .bottom__enemyContainer
+        .board__playerBoard
+            +board($enemyBoardSize)
+        .board__square
+            +square($enemySquareSize)
+        .board__collectedSquaresContainer
+            +colSqrCont($enemyBoardSize)
     //
 
     //Top
@@ -80,7 +82,7 @@
         bottom: 3%
         right: 10%
     //
-    
+
     //Middle
     .board
         height: 40vh
@@ -100,13 +102,14 @@
         font-size: 100px
     .bottom__enemyNameContainer
         font-size: 30px
-    .bottom__enemyCollectedSquaresContainer
-        width: 35%
-    .bottom__enemyCollectedSquares
-        +circle(25px, 50%)
-    .bottom__enemyNegativePointsContainer
-        +negPoints(50px)
-        font-size: 28px
+    .bottom__enemyContainer
+        .board__collectedSquaresContainer
+            width: 35%
+        .board__collectedSquares
+            +circle(25px, 50%)
+        .board__negativePointsContainer
+            +negPoints(50px)
+            font-size: 28px
     //
 
 @media (min-width: 1024px) //Desktop
@@ -123,14 +126,15 @@
         +board($boardSize)
     .board__square
         +square($squareSize)
-    .bottom__enemyBoard
-        +board($enemyBoardSize)
-    .bottom__enemySquare
-        +square($enemySquareSize)
     .board__collectedSquaresContainer
         +colSqrCont($boardSize)
-    .bottom__enemyCollectedSquaresContainer
-        +colSqrCont($enemyBoardSize)
+    .bottom__enemyContainer
+        .board__playerBoard
+            +board($enemyBoardSize)
+        .board__square
+            +square($enemySquareSize)
+        .board__collectedSquaresContainer
+            +colSqrCont($enemyBoardSize)
     //
 
     //Layout
@@ -186,11 +190,11 @@
     .bottom__enemyContainer
         width: 90%
         height: 70%
-    .bottom__enemyCollectedSquares
-        +circle(20px, 50%)
-    .bottom__enemyNegativePointsContainer
-        +negPoints(40px)
-        font-size: 24px
+        .board__collectedSquares
+            +circle(20px, 50%)
+        .board__negativePointsContainer
+            +negPoints(40px)
+            font-size: 24px
     .bottom__playersContainer
         flex-direction: row
         align-items: center
@@ -206,13 +210,13 @@
         width: 65%
         padding: 0
         font-size: 26px
-    .bottom__player 
+    .bottom__player
         width: 40%
     .bottom__changePlayer
         height: 90%
         width: 35%
     //
-    
+
 @media (min-width: 1366px) //Desktop
     //Variables
     $boardSize : 450px
@@ -226,16 +230,17 @@
         +board($boardSize)
     .board__square
         +square($squareSize)
-    .bottom__enemyBoard
-        +board($enemyBoardSize)
-    .bottom__enemySquare
-        +square($enemySquareSize)
     .board__collectedSquaresContainer
         +colSqrCont($boardSize)
-    .bottom__enemyCollectedSquaresContainer
-        +colSqrCont($enemyBoardSize)
+    .bottom__enemyContainer
+        .board__playerBoard
+            +board($enemyBoardSize)
+        .board__square
+            +square($enemySquareSize)
+        .board__collectedSquaresContainer
+            +colSqrCont($enemyBoardSize)
     //
- 
+
     .wrapper
         min-height: 868px
     .main
@@ -262,11 +267,6 @@
     .bottom
         flex-direction: column
         padding-top: 2%
-    .bottom__enemyCollectedSquares
-        +circle(24px, 50%)
-    .bottom__enemyNegativePointsContainer
-        +negPoints(50px)
-        font-size: 30px
     .bottom__enemyName
         font-size: 34px
     .bottom__players

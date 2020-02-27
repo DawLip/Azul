@@ -68,5 +68,32 @@
 .board__square--active
     opacity: 1
 //
+.bottom__enemyContainer
+    .board
+        +boardContainer(85%, 100%, row-reverse)
+    .board__collectedSquares
+        +circle(10px, 50%)
+        margin-left: 5%
+        background-color: #353535
+    .board__collectedSquaresContainer
+        +colSqrCont($enemyBoardSize)
+    .board__collectedSquaresRow
+        display: flex
+        flex-direction: row-reverse
+        align-items: center
+        width: 100%
+        height: 20%
+    .board__square
+        +square($enemySquareSize)
+    .board__playerBoard
+        +board(145px)
 
+    //Negative points
+    .board__negativePointsContainer
+        +negPoints(26px)
+        display: flex
+        justify-content: space-around
+        align-items: center
+        letter-spacing: 1px
+        font-size: 14px
 @import ../sass/_media
