@@ -11,7 +11,7 @@ export const gameData = (socket, dispatch, gameToken) => (
       blue: 0,
       yellow: 0,
       red: 0,
-      black: 0,
+      green: 0,
       white: 0,
       firstPlayer: 1
     },
@@ -92,7 +92,7 @@ export const gameData = (socket, dispatch, gameToken) => (
 
     case 'RANDOM_COLORS': {
       const { colorsInBag, workshopsColor, players } = state;
-      const possibleColors = ['blue', 'yellow', 'red', 'black', 'white'];
+      const possibleColors = ['blue', 'yellow', 'red', 'green', 'white'];
       const numOfWorkshops = players.length * 2 + 1;
 
       if (
@@ -124,11 +124,11 @@ export const gameData = (socket, dispatch, gameToken) => (
     case 'COUNT_POINTS': {
       const { players, nextRoundFirstPlayer, rejectedSquares } = state;
       const colors = [
-        ['blue', 'yellow', 'red', 'black', 'white'],
-        ['white', 'blue', 'yellow', 'red', 'black'],
-        ['black', 'white', 'blue', 'yellow', 'red'],
-        ['red', 'black', 'white', 'blue', 'yellow'],
-        ['yellow', 'red', 'black', 'white', 'blue']
+        ['blue', 'yellow', 'red', 'green', 'white'],
+        ['white', 'blue', 'yellow', 'red', 'green'],
+        ['green', 'white', 'blue', 'yellow', 'red'],
+        ['red', 'green', 'white', 'blue', 'yellow'],
+        ['yellow', 'red', 'green', 'white', 'blue']
       ];
 
       players.forEach(player => {
@@ -285,7 +285,7 @@ export const gameData = (socket, dispatch, gameToken) => (
           workshopColor => workshopColor === colorOfSquare
         ).length;
 
-        const usedColors = ['blue', 'yellow', 'red', 'black', 'white'];
+        const usedColors = ['blue', 'yellow', 'red', 'green', 'white'];
         const rejectedSquares = workshopsColor
           .splice(workshopsColor.length - 1, 1)
           .flat()
@@ -339,11 +339,11 @@ export const gameData = (socket, dispatch, gameToken) => (
       let { storedSquares } = player;
       const choosedRow = player.queue[rowIndex];
       const colors = [
-        ['blue', 'yellow', 'red', 'black', 'white'],
-        ['white', 'blue', 'yellow', 'red', 'black'],
-        ['black', 'white', 'blue', 'yellow', 'red'],
-        ['red', 'black', 'white', 'blue', 'yellow'],
-        ['yellow', 'red', 'black', 'white', 'blue']
+        ['blue', 'yellow', 'red', 'green', 'white'],
+        ['white', 'blue', 'yellow', 'red', 'green'],
+        ['green', 'white', 'blue', 'yellow', 'red'],
+        ['red', 'green', 'white', 'blue', 'yellow'],
+        ['yellow', 'red', 'green', 'white', 'blue']
       ];
       const isSquareFinished =
         player.board[rowIndex][colors[rowIndex].findIndex(color => color === storedSquares.color)];

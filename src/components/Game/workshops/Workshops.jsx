@@ -161,11 +161,11 @@ class Workshops extends React.Component {
             <div className="workshops__rejectedGroup">
               <div
                 className={`workshops__rejectedSquare ${
-                  rejectedSquares.black ? `workshops__color--black` : ''
+                  rejectedSquares.green ? `workshops__color--green` : ''
                 }`}
-                onClick={() => this.props.chooseSquareToCollectS('black')}
+                onClick={() => this.props.chooseSquareToCollectS('green')}
               >
-                {rejectedSquares.black ? rejectedSquares.black : ''}
+                {rejectedSquares.green ? rejectedSquares.green : ''}
               </div>
               <div
                 className={`workshops__rejectedSquare ${
