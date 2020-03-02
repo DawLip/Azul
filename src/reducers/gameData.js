@@ -56,11 +56,11 @@ export const gameData = (socket, dispatch, gameToken) => (
           },
           isChoosedSquareToCollect: false,
           board: [
+            ['blue', false, false, false, false],
             [false, false, false, false, false],
-            [false, false, false, false, false],
-            [false, false, false, false, false],
-            [false, false, false, false, false],
-            [false, false, false, false, false]
+            [false, false, 'blue', false, false],
+            [false, false, false, 'blue', false],
+            [false, false, false, false, 'blue']
           ],
           queue: [
             {
@@ -141,14 +141,14 @@ export const gameData = (socket, dispatch, gameToken) => (
           if (queue[rowIndex].numberOfSquares === rowIndex + 1) {
             const colIndex = colors[rowIndex].findIndex(color => color === queueItem.color);
             board[rowIndex][colIndex] = queueItem.color;
-            queue[rowIndex].numberOfSquares = 0;
-            queue[rowIndex].color = '';
 
             let neighborRowIndex = rowIndex - 1;
             let neighborColIndex = colIndex;
             pointsToAdd.push('');
             let isChanging = true;
             let wasChanging = false;
+            let squaresInRow = 0;
+            let squaresInCol = 0;
 
             //check to up
             while (isChanging) {
@@ -159,6 +159,7 @@ export const gameData = (socket, dispatch, gameToken) => (
                 wasChanging = true;
                 console.log('add up');
                 pointsToAdd.push('');
+                squaresInRow++;
                 neighborRowIndex--;
               } else isChanging = false;
             }
@@ -174,6 +175,7 @@ export const gameData = (socket, dispatch, gameToken) => (
                 wasChanging = true;
                 console.log('add down');
                 pointsToAdd.push('');
+                squaresInRow++;
                 neighborRowIndex++;
               } else isChanging = false;
             }
@@ -189,6 +191,7 @@ export const gameData = (socket, dispatch, gameToken) => (
               ) {
                 console.log('add left');
                 pointsToAdd.push('');
+                squaresInCol++;
                 neighborColIndex--;
                 if (wasChanging) {
                   wasChanging = false;
@@ -209,12 +212,31 @@ export const gameData = (socket, dispatch, gameToken) => (
 
                 pointsToAdd.push('');
                 neighborColIndex++;
+                squaresInCol++;
                 if (wasChanging) {
                   wasChanging = false;
                   pointsToAdd.push('');
                 }
               } else isChanging = false;
             }
+
+            //adding points for full column/row/color
+            if (squaresInCol === 4) {
+              pointsToAdd.push('', '');
+            }
+            if (squaresInRow === 4) {
+              for (let i = 0; i < 7; i++) {
+                pointsToAdd.push('');
+              }
+            }
+            if (board.flat().filter(color => color === queueItem.color).length === 5) {
+              for (let i = 0; i < 10; i++) {
+                pointsToAdd.push('');
+              }
+            }
+
+            queue[rowIndex].numberOfSquares = 0;
+            queue[rowIndex].color = '';
           }
         });
 
