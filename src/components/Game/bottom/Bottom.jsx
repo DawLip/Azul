@@ -25,7 +25,7 @@ class Bottom extends React.Component {
             {this.props.gameData.players.map(player => (
               <p className="bottom__player">
                 <span className="bottom__playerPoints">{player.name}</span>
-                {player.points}
+                {player.points} {players[idOfPlayerWhoseIsTurn].name === player.name && '<--'}
               </p>
             ))}
           </div>
