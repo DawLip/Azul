@@ -1,22 +1,7 @@
-@media (orientation: landscape) and (min-width: 660px)
-	.lobby
-		font-size: 14px
+@media (orientation: landscape) and (max-width: 640px), (orientation: landscape) and (max-height: 600px)
+	.lobby__rotate, .menu__rotate
+		display: block
+		color: white
 
-@media (orientation: landscape) and (min-width: 1024px)
-	.lobby
-		font-size: 18px
-	.lobby__button
-		height: 10vh
-		width: 18vw
-
-@media (orientation: landscape) and (min-width: 1300px)
-	.lobby
-		font-size: 22px
-	.lobby__title
-		margin: 8vh auto 5vh
-
-@media (orientation: landscape) and (min-width: 1400px)
-	.lobby
-		font-size: 24px
-	.lobby__button
-		width: 15vw
+	.lobby__rotate i, .menu__rotate i
+		animation: rotate 5s ease infinite

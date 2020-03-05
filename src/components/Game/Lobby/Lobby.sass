@@ -1,65 +1,84 @@
-$player-Size: 12vw
+@import ../sass/_mixins
 
-@mixin div()
-	display: flex
-	width: 90vw
-	margin: 3vh auto
-	justify-content: space-evenly
-	align-items: space-evenly
-
-@mixin btn($btn-size)
-	display: block
-	width: 20vw
-	height: $btn-size
-	text-transform: uppercase
-	border: 5px solid #fff
-	border-radius: 50%/30%
-
-body
-	background-color: #ddd
-
-//?????????????????????????????????????????????
 .lobby
-	position: fixed
-	left: 0
+	height: 100vh
+	width: 100vw
+	background-color: #000
+	color: #ffffff
+	font-family: "Roboto"
+
+.lobby__rotate
+	display: none
+	position: absolute
 	top: 0
+	left: 0
 	width: 100%
-	min-height: 100vh
-//?????????????????????????????????????????????
+	height: 130%
+	z-index: 1
+	background-color: #000
+	display: none
+	text-align: center
+
+.lobby__rotateWarning
+	font-size: 32px
+	line-height: 50vh
 
 .lobby__title
-	margin: 5vh auto
+	text-align: center
+	font-size: 3.5em
+	padding: 10vh 0 4vh 0
+	letter-spacing: 2px
 
-.lobby__playerRectangle
-	@include div()
-	height: 60vh
+.lobby__exit
+	position: absolute
+	top: 0
+	left: 0
+	height: 50px
+	width: 50px
+	border: none
+	background-color: white
+	font-size: 1.5em
+	border-radius: 0 0 10px 0
+
+.lobby__wrapper
+	flex-direction: column
+	max-width: 500px
+	min-width: 300px
+	min-height: 200px
+	margin: 0 auto
+	+lobbyFlex(45vh, 85%, space-evenly, #333)
+
+.lobby__player
+	+lobbyFlex(15%, 90%, space-between, #999)
+
+.lobby__players
+	font-size: 1.6em
+	letter-spacing: 1px
+
+.lobby__nick
+	margin-left: 7%
+	overflow: hidden
+	text-overflow: ellipsis
+	color: black
+	font-size: 160%
+
+.lobby__nick--you
+	font-size: 60%
+
+.lobby__changeName, .lobby__kick
+	+lobbyOptions(30px)
+
+.lobby__buttons
 	flex-wrap: wrap
+	align-content: space-around
+	align-items: stretch
+	max-width: 500px
+	min-width: 300px
+	margin: 0 auto
+	+lobbyFlex(30vh, 85%, space-between, transparent)
 
-.lobby__playerSquare
-	display: flex
-	justify-content: center
-	align-items: center
-	flex-basis: 25%
-.lobby__playerSquare--is_player
-	a
-		background-color: red
-a
-	display: block
-	width: $player-Size
-	height: $player-Size
-	border: 4px solid #000
+.lobby__cpButton
+	+lobbyButton(40%, 1.2em)
 
-.lobby__bottom
-	@include div()
-	height: 15vh
-	align-items: center
-
-.lobby__button
-	@include btn(15vh)
-	background-color: #f00
-
-.lobby__button:nth-last-child(1)
-	background-color: #0f0
-
-.lobby__link
-	font-size: 1em
+.lobby__readyButton
+	+lobbyButton(100%, 2em)
