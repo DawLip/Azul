@@ -1,25 +1,78 @@
-@media (orientation: landscape) and (min-width: 630px)
-	.main-menu
-		font-size: 12px
+@media (orientation: landscape) and (max-width: 640px), (orientation: landscape) and (max-height: 600px)
+	.lobby__rotate, .menu__rotate
+		display: block
+		color: white
 
-@media (orientation: landscape) and (min-width: 730px)
-	.main-menu
-		font-size: 14px
+	.lobby__rotate i, .menu__rotate i
+		animation: rotate 5s ease infinite
 
-@media (orientation: landscape) and (min-width: 1000px)
-	.main-menu
-		font-size: 18px
+@keyframes rotate
+	0%
+		font-size: 0
+		transform: rotate(-360deg)
 
-	.main-menu__main
-		a
-			&:nth-of-type(3)
-				flex-basis: 80%
-				margin: 10px 0
+	20%
+		font-size: 6em
+		transform: rotate(90deg)
 
-		.main-menu__input
-			width: 80%
-			margin: 10px 0
+	40%
+		font-size: 6em
+		transform: rotate(90deg)
 
-@media (orientation: landscape) and (min-width: 1300px)
-	.main-menu
-		font-size: 24px
+	59%
+		font-size: 6em
+		transform: rotate(0deg)
+
+	60%
+		transform: rotate(-5deg)
+
+	61%
+		transform: rotate(5deg)
+
+	62%
+		transform: rotate(-5deg)
+
+	63%
+		transform: rotate(5deg)
+
+	64%
+		transform: rotate(-5deg)
+
+	65%
+		font-size: 6em
+		transform: rotate(0deg)
+
+	90%
+		font-size: 6em
+		transform: rotate(0deg)
+
+	100%
+		font-size: 0
+
+@keyframes bg
+	0%
+		background-position: 0 0
+
+	12.5%
+		background-position: 100% 0%
+
+	25%
+		background-position: 100% 100%
+
+	37.5%
+		background-position: 0 100%
+
+	50%
+		background-position: 0 0
+
+	62.5%
+		background-position: 0 100%
+
+	75%
+		background-position: 100% 100%
+
+	87.5%
+		background-position: 100% 0%
+
+	100%
+		background-position: 0 0

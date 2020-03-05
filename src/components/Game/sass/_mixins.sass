@@ -65,3 +65,54 @@
     background-color: #353535
     font-size: $size
 //
+
+//Domer
+=lobbyButton($width, $fz)
+    height: 7vh
+    width: $width
+    font-weight: bold
+    border-radius: 12px
+    border: none
+    border-radius: 5px
+    background-color: #999
+    color: black
+    font-size: $fz
+
+=lobbyFlex($height, $width, $jc, $bgc)
+    display: flex
+    align-items: center
+    justify-content: $jc
+    width: $width
+    height: $height
+    border-radius: 5px
+    background-color: $bgc
+
+=lobbyOptions($size)
+    height: $size
+    width: $size
+    line-height: 100%
+    font-size: 120%
+    margin-right: 5%
+    border: none
+    border-radius: 3px
+    background-color: #000
+    color: white
+    font-size: 1em
+
+=previewControls($width)
+    width: $width
+    height: 10%
+    margin: 10px 0 
+    border-radius: 10px
+    border: none
+
+=rotateWarning
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 130%
+    z-index: 2
+    background-color: #000
+    display: none
+    text-align: center
