@@ -56,14 +56,23 @@
 	letter-spacing: 1px
 
 .lobby__nick
+	width: 100%
 	margin-left: 7%
 	overflow: hidden
 	text-overflow: ellipsis
 	color: black
 	font-size: 160%
-
-.lobby__nick--you
-	font-size: 60%
+	text-align: left
+.lobby__changeNameBtn
+	display: inline-block
+	width: 70%
+	text-align: center
+	overflow: hidden
+	text-overflow: ellipsis
+	color: black
+	font-size: 160%
+	border: none
+	background-color: transparent
 
 .lobby__changeName, .lobby__kick
 	+lobbyOptions(30px)
