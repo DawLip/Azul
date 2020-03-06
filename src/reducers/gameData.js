@@ -18,6 +18,7 @@ export const gameData = (socket, dispatch, gameToken) => (
 		players: []
 	},
 	{ type, workshopIndex, colorOfSquare, rowIndex, gameData, name, index }
+
 ) => {
 	switch (type) {
 		case 'SOCKETIO_INIT': {

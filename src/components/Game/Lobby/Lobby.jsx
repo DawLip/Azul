@@ -29,7 +29,6 @@ class Lobby extends React.Component {
 				<h1 className="lobby__title">Lobby</h1>
 				<div className="lobby__wrapper">
 					<h3 className="lobby__players">Players</h3>
-
 					{
 						players?.map((player, index) => (
 							<div className="lobby__player">
@@ -54,19 +53,6 @@ class Lobby extends React.Component {
 					)}
 				</div>
 			</div>
-      /* <div className="lobby">
-          <h1 className="lobby__title">Players in lobby:</h1>
-          <div className="lobby__playerRectangle">{players}</div>
-          <div className="lobby__bottom">
-            {gameData.playerId === 0 && <button className="lobby__button">kick</button>}
-            <h2 className="lobby__link">Token: GH643HJ8</h2>
-            {gameData.playerId === 0 && (
-              <button className="lobby__button" onClick={this.startGame}>
-                start
-              </button>
-            )}
-          </div>
-        </div> */
 		);
 	}
 }
