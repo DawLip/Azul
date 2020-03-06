@@ -15,12 +15,7 @@ export const gameData = (socket, dispatch, gameToken) => (
       white: 0,
       firstPlayer: 1
     },
-    players: [
-      { name: 'player1', points: 34 },
-      { name: 'player2', points: 50 },
-      { name: 'player3', points: -10 },
-      { name: 'player4', points: 6 }
-    ]
+    players: []
   },
   { type, workshopIndex, colorOfSquare, rowIndex, gameData }
 ) => {
