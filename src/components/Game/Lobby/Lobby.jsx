@@ -23,8 +23,9 @@ class Lobby extends React.Component {
 					<i className="fas fa-mobile-alt lobby__rotateWarning"></i>
 					<p className="lobby__rotateWarning">Obróć urządzenie</p>
 				</div>
+
 				<button className="lobby__exit">
-					<i className="fas fa-sign-out-alt"></i>
+					<Link to={`/`}><i className="fas fa-sign-out-alt"></i></Link>
 				</button>
 				<h1 className="lobby__title">Lobby</h1>
 				<div className="lobby__wrapper">

@@ -15,7 +15,7 @@ export const gameData = (socket, dispatch, gameToken) => (
 			white: 0,
 			firstPlayer: 1
 		},
-		players: []
+		players: [],
 	},
 	{ type, workshopIndex, colorOfSquare, rowIndex, gameData, name, index }
 
