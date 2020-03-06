@@ -16,10 +16,10 @@ export const gameData = (socket, dispatch, gameToken) => (
       firstPlayer: 1
     },
     players: [
-      { name: 'p1', points: 2 },
-      { name: 'p2', points: 3 },
-      { name: 'p3', points: 1 },
-      { name: 'p4', points: 6 }
+      { name: 'player1', points: 34 },
+      { name: 'player2', points: 50 },
+      { name: 'player3', points: -10 },
+      { name: 'player4', points: 6 }
     ]
   },
   { type, workshopIndex, colorOfSquare, rowIndex, gameData }

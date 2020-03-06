@@ -71,9 +71,11 @@ class Lobby extends React.Component {
         <div class="lobby__buttons">
           <button class="lobby__cpButton">Copy Token</button>
           <button class="lobby__cpButton">Copy Link</button>
-          <button class="lobby__readyButton" onClick={this.startGame}>
-            Ready
-          </button>
+          {gameData.playerId === 0 && (
+            <button className="lobby__readyButton" onClick={this.startGame}>
+              Start
+            </button>
+          )}
         </div>
       </div>
       /* <div className="lobby">

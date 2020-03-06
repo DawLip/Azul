@@ -16,22 +16,24 @@ class GameIsEnded extends React.Component {
         <h1 className="endOfMatch__title">End Of Match</h1>
         <div className="endOfMatch__placement">
           <div className="endOfMatch__place">
-            <p className="endOfMatch__points">69</p>
-            <p className="endOfMatch__nick">Qler</p>
+            <p className="endOfMatch__points">{playersOrder[1].points}</p>
+            <p className="endOfMatch__nick">{playersOrder[1].name}</p>
           </div>
           <div className="endOfMatch__firstAndFourth">
             <div className="endOfMatch__first">
-              <p className="endOfMatch__points">666</p>
-              <p className="endOfMatch__nick">Boomer</p>
+              <p className="endOfMatch__points">{playersOrder[0].points}</p>
+              <p className="endOfMatch__nick">{playersOrder[0].name}</p>
             </div>
             <div className="endOfMatch__fourth">
-              {players.length === 4 && <p className="endOfMatch__points">420</p>}
-              {players.length === 4 && <p className="endOfMatch__nick">Djuk</p>}
+              {players.length === 4 && (
+                <p className="endOfMatch__points">{playersOrder[3].points}</p>
+              )}
+              {players.length === 4 && <p className="endOfMatch__nick">{playersOrder[3].name}</p>}
             </div>
           </div>
           <div className="endOfMatch__place">
-            {players.length > 2 && <p className="endOfMatch__points">1337</p>}
-            {players.length > 2 && <p className="endOfMatch__nick">Lipa</p>}
+            {players.length > 2 && <p className="endOfMatch__points">{playersOrder[2].points}</p>}
+            {players.length > 2 && <p className="endOfMatch__nick">{playersOrder[2].name}</p>}
           </div>
         </div>
         <div className="preview">
