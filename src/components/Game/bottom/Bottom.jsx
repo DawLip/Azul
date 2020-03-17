@@ -31,13 +31,13 @@ class Bottom extends React.Component {
           </div>
 
           <div className="bottom__changePlayer">
-            <div className="bottom__menuBtn">
+            {/* <div className="bottom__menuBtn">
               <i className="fas fa-bars"></i>
             </div>
 
             <div className="bottom__changePlayerBtn">
               <i className="fas fa-caret-right"></i>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
