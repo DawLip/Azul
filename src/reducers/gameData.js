@@ -322,17 +322,16 @@ export const gameData = (socket, dispatch, gameToken) => (
       const { players, rejectedSquares, playerId, turn } = state;
       const player = players[playerId];
 
-      if (rejectedSquares.firstPlayer) {
-        rejectedSquares.firstPlayer = 0;
-        player.negativeSquares++;
-        state.nextRoundFirstPlayer = playerId;
-      }
-
       if (
         !player.isChoosedSquareToCollect &&
         turn % players.length === playerId &&
         rejectedSquares[colorOfSquare]
       ) {
+        if (rejectedSquares.firstPlayer) {
+          rejectedSquares.firstPlayer = 0;
+          player.negativeSquares++;
+          state.nextRoundFirstPlayer = playerId;
+        }
         player.storedSquares.color = colorOfSquare;
         player.storedSquares.number = rejectedSquares[colorOfSquare];
         rejectedSquares[colorOfSquare] = 0;
