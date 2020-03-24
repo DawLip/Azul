@@ -10,7 +10,7 @@ import './LobbyMedia.sass';
 
 class Lobby extends React.Component {
   startGame = () => {
-    this.props.initStartGame(this.props.gameData.id);
+    if (this.props.gameData.players.length) this.props.initStartGame(this.props.gameData.id);
   };
 
   render() {

@@ -7,6 +7,7 @@ import Interface from './Interface/Interface.jsx';
 import GameStarted from './GameStarted/GameStarted.jsx';
 import Lobby from './Lobby/Lobby.jsx';
 import GameIsEnded from './GameIsEnded/GameIsEnded.jsx';
+import TooManyPlayers from './TooManyPlayers/TooManyPlayers.jsx';
 
 class Game extends React.Component {
   componentDidMount = () => {
@@ -19,6 +20,7 @@ class Game extends React.Component {
     if (isGameStarted) return <GameStarted />;
     else if (status === 'started') return <Interface />;
     else if (status === 'ended') return <GameIsEnded />;
+    else if (status === 'too many players') return <TooManyPlayers />;
     return <Lobby />;
   }
 }
