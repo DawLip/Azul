@@ -39,7 +39,12 @@
     .workshops__rejectedSquare
         +circle(35px, 20%)
     //
-
+@media ( min-width: 410px ) // for TooManyPlayers
+    .tooManyPlayers
+        font-size: 28px
+    .tooManyPlayers__text
+        width: 250px
+    
 @media  (min-width: 768px) and (min-height: 858px) //Tablets
     //Variables
     $boardSize : 375px
@@ -110,6 +115,15 @@
         .board__negativePointsContainer
             +negPoints(50px)
             font-size: 28px
+    //
+
+    //TooManyPlayers
+    .tooManyPlayers
+        font-size: 46px
+    .tooManyPlayers__text
+        width: 430px
+    .tooManyPlayers__bootomIcon
+        top: calc(50% + 70px)
     //
 
 @media (min-width: 1024px) //Desktop
@@ -217,6 +231,15 @@
         width: 35%
     //
 
+    //TooManyPlayers
+    .tooManyPlayers
+        font-size: 60px
+    .tooManyPlayers__text
+        width: 600px
+    .tooManyPlayers__bootomIcon
+        top: calc(50% + 100px)
+    //
+
 @media (min-width: 1366px) //Desktop
     //Variables
     $boardSize : 450px
@@ -271,4 +294,13 @@
         font-size: 34px
     .bottom__players
         font-size: 34px
+    //
+
+    //TooManyPlayers
+    .tooManyPlayers
+        font-size: 80px
+    .tooManyPlayers__text
+        width: 800px
+    .tooManyPlayers__bootomIcon
+        top: calc(50% + 140px)
     //
