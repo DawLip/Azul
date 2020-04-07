@@ -13,7 +13,7 @@ const server = app.listen(port, () => console.log('App listening on port: ' + po
 
 app.use(express.static(DIST_DIR));
 
-sockets('/app' + server);
+sockets(server);
 
 app.get('*', (req, res) => {
   res.sendFile('/app' + HTML_FILE);
