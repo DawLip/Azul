@@ -27,6 +27,7 @@ module.exports = [
     devtool: 'inline-source-map',
     node: { fs: 'empty' },
     plugins: [htmlPlugin],
+    externals: ['uws', 'net'],
     module: {
       rules: [
         {
