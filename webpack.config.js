@@ -1,5 +1,6 @@
 const path = require('path');
 
+const nodeExternals = require('webpack-node-externals');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const htmlPlugin = new HtmlWebPackPlugin({
   filename: './index.html',
@@ -55,9 +56,10 @@ module.exports = [
       path: path.join(__dirname, 'dist'),
       filename: 'server.js'
     },
+    target: 'node',
+    externals: [nodeExternals(), 'uws', 'net'],
     devtool: 'inline-source-map',
     node: { fs: 'empty' },
-    externals: ['uws', 'net'],
     module: {
       rules: [
         {
