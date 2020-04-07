@@ -7,6 +7,7 @@
     "start": "node ./dist/server.js",
     "heroku-postbuild": "webpack -d",
     "server": "nodemon ./dist/index.js",
+    "postinstall": "ng build --aot --prod",
     "wp": "webpack --mode development",
     "watch": "webpack --mode development --watch",
     "fix": "./node_modules/.bin/eslint ./src/index.jsx --fix",
