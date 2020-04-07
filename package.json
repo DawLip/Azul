@@ -5,7 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node ./dist/server.js",
-    "heroku-postbuild": "cd client && webpack -d",
+    "heroku-postbuild": "echo dir && webpack -d",
     "server": "nodemon ./dist/index.js",
     "wp": "webpack --mode development",
     "watch": "webpack --mode development --watch",
