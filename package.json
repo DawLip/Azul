@@ -30,9 +30,7 @@
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
     "webpack-node-externals": "^1.7.2",
-    "@babel/core": "^7.7.7"
-  },
-  "devDependencies": {
+    "@babel/core": "^7.7.7",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-proposal-decorators": "^7.0.0",
     "@babel/plugin-proposal-do-expressions": "^7.0.0",
@@ -76,5 +74,6 @@
     "prettier": "^1.19.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
-  }
+  },
+  "devDependencies": {}
 }
