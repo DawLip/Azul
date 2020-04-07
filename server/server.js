@@ -11,7 +11,7 @@ console.log(__filename, __dirname, DIST_DIR, HTML_FILE);
 
 const server = app.listen(port, () => console.log('App listening on port: ' + port));
 
-app.use('/app' + express.static(DIST_DIR));
+app.use(express.static('/app' + DIST_DIR));
 
 sockets(server);
 
